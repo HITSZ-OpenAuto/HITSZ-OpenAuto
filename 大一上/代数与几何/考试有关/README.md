@@ -1,2 +1,2 @@
 # 使用说明
->贡献者：[lym](https://github.com/handleandwheel)
+>贡献者：[YumingLiu](https://github.com/handleandwheel)
