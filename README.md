@@ -37,7 +37,7 @@
 2. 考研经验分享
 3. 就业经验分享
 4. 出国留学经验分享
-5. 选课指南
+5. 选课指南:【腾讯文档】[HITSZ自动化选课指南](https://docs.qq.com/sheet/DWG5peENzSk1sTk1G)
 
 ## 愿景 | Vision
 
