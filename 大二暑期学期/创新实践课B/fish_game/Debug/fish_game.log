@@ -1,0 +1,3 @@
+﻿  main.cpp
+D:\files\课业繁忙\C语言程序设计\大作业\fish_game\main.cpp(565,32): warning C4244: “*=”: 从“double”转换到“int”，可能丢失数据
+  fish_game.vcxproj -> D:\files\课业繁忙\C语言程序设计\大作业\fish_game\Debug\fish_game.exe
