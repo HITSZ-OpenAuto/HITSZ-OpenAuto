@@ -10,15 +10,15 @@ IMU的工作原理是通过其中包含的加速度计来测量X、Y、Z三个�
 
 这里引用一下知乎用户[ 任乾  ](https://www.zhihu.com/people/ren-gan-16)的几张图
 
-![1](https://mh-storage-1310890648.cos.ap-guangzhou.myqcloud.com/markdown-pic/202212011534990.jpg)
+![1](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/98481de302651a55df7edd8b9c2cea64/202212021957255.jpg)
 
 陀螺仪发展历程：
 
-![2](https://mh-storage-1310890648.cos.ap-guangzhou.myqcloud.com/markdown-pic/202212011535541.jpg)
+![2](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/19024684b305831b1f0fda4bf357bd29/202212021958817.jpg)
 
 加速度计发展历程：
 
-![3](https://mh-storage-1310890648.cos.ap-guangzhou.myqcloud.com/markdown-pic/202212011536790.jpg)
+![3](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/3d6bfd8bb0b8c11803a7b8903df67503/202212021959025.jpg)
 
 ## 二、作用与缺点
 
@@ -38,4 +38,8 @@ IMU的误差通常由以下几部分组成：
 -   安装误差：指的是传感器旋转与外界机身旋转不同轴带来的误差，与第三项误差基本相同，一个内一个外
 -   加速度灵敏度误差：此项误差仅指陀螺仪，指的是陀螺仪的角速率测量因加速度的影响带来的误差
 -   随机噪声：主要由结构的随机噪声和电路的随机噪声组成
+
+不同领域对IMU精度的不同要求：
+
+![4](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/7e8ec1dbda8cd42d7106cef8f4edd59b/202212022004175.jpg)
 
