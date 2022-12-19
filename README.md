@@ -1,7 +1,7 @@
 # 哈工大（深圳）自动化专业课程攻略 | HITSZ-OpenAuto
 
 感谢那些曾经对该项目作出贡献的同学，他们是（排名不分先后）：
-[MinghangLi](https://github.com/lmh12138)、[猪肚鸡](https://github.com/zdj-creator)、[Yuming LIU](https://github.com/handleandwheel)、[Sylybimike](https://github.com/sylybimike2001)、[小红帽](https://github.com/hoshino-lr)、[山樵](https://github.com/EricTonyLiu)、[Lewis74](https://github.com/Lewis74CoLA)、[longlin li](https://github.com/longlin10086)、[尘息](https://github.com/chenxijun)、[TangLongbin](https://github.com/TangLongbin)
+[MinghangLi](https://github.com/lmh12138)、[猪肚鸡](https://github.com/zdj-creator)、[Yuming LIU](https://github.com/handleandwheel)、[Sylybimike](https://github.com/sylybimike2001)、[小红帽](https://github.com/hoshino-lr)、[山樵](https://github.com/EricTonyLiu)、[Lewis74](https://github.com/Lewis74CoLA)、[longlin li](https://github.com/longlin10086)、[尘息](https://github.com/chenxijun)、[TangLongbin](https://github.com/TangLongbin)、[ImHuangZifeng](https://github.com/ImHuangZifeng)
 ……以及电脑前的您！
 
 受 [浙江大学相关项目](https://github.com/QSCTech/zju-icicles) 和 [哈工大（深圳）计算机系相关项目](https://github.com/hewei2001/HITSZ-OpenCS) 启发，创立了本项目。
