@@ -11,8 +11,6 @@ rosdep update
 
 `rosdep`能帮助我们安装ROS包所需要的依赖，然而执行的时候，通常会出现：
 
-通常情况下，会出现：
-
 ![image-20230118170105143](https://git.nrs-lab.com/LiMinghang23m/picgo-pic/-/raw/main/pictures/2023/01/18_17_1_5_image-20230118170105143.png)
 
 这个问题来源是大陆的DNS污染，我们首先要手动更改域名解析：
