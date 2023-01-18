@@ -15,7 +15,7 @@ rosdep update
 
 这个问题来源是大陆的DNS污染，我们首先要手动更改域名解析：
 
-打开https://site.ip138.com/，输入`raw.githubusercontent.com`，查询其IP地址：
+打开https://site.ip138.com/ ，输入`raw.githubusercontent.com`，查询其IP地址：
 
 ![image-20230118171754504](https://git.nrs-lab.com/LiMinghang23m/picgo-pic/-/raw/main/pictures/2023/01/18_17_17_54_image-20230118171754504.png)
 
