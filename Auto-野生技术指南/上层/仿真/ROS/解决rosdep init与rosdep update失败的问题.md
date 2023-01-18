@@ -41,7 +41,7 @@ rosdep init
 
 如果还是访问不了的话，那我们手动进行`rosdep init`的操作：
 
-用电脑访问https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list， 可看到如下界面：
+用电脑访问https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list ,可看到如下界面：
 
 ![image-20230118170300075](https://git.nrs-lab.com/LiMinghang23m/picgo-pic/-/raw/main/pictures/2023/01/18_18_6_17_18_17_3_0_image-20230118170300075.png)
 
