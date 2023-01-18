@@ -10,15 +10,15 @@ IMU的工作原理是通过其中包含的加速度计来测量X、Y、Z三个�
 
 这里引用一下知乎用户[ 任乾  ](https://www.zhihu.com/people/ren-gan-16)的几张图
 
-![1](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/98481de302651a55df7edd8b9c2cea64/202212021957255.jpg)
+![1](https://git.nrs-lab.com/LiMinghang23m/picgo-pic/-/raw/main/pictures/2023/01/18_11_43_54_caa43857180b5df9c242c59f9dc8011e.jpeg)
 
 陀螺仪发展历程：
 
-![2](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/19024684b305831b1f0fda4bf357bd29/202212021958817.jpg)
+![2](https://git.nrs-lab.com/LiMinghang23m/picgo-pic/-/raw/main/pictures/2023/01/18_11_43_58_567709e353f7d721912910ffe0824086.jpeg)
 
 加速度计发展历程：
 
-![3](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/3d6bfd8bb0b8c11803a7b8903df67503/202212021959025.jpg)
+![3](https://git.nrs-lab.com/LiMinghang23m/picgo-pic/-/raw/main/pictures/2023/01/18_11_44_4_e5a684d7b3988e15fc8c9d796708be43.jpeg)
 
 ## 二、作用与缺点
 
@@ -41,5 +41,5 @@ IMU的误差通常由以下几部分组成：
 
 不同领域对IMU精度的不同要求：
 
-![4](https://git.nrs-lab.com/lmh-group/picgo-pic/uploads/7e8ec1dbda8cd42d7106cef8f4edd59b/202212022004175.jpg)
+![4](https://git.nrs-lab.com/LiMinghang23m/picgo-pic/-/raw/main/pictures/2023/01/18_11_44_11_b44a8f21bffbef8247fe139ab50e244b.jpeg)
 
