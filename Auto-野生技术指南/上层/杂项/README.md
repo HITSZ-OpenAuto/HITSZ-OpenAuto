@@ -1,8 +1,3 @@
-<!--
- * @Author         : Minghang Li
- * @Date           : 2022-11-25 20:46
- * @LastEditTime   : 2022-12-01 16:37
- * @Note           : 
- * @Copyright(c)   : Minghang Li Copyright
--->
 # 一些技术杂项
+
+- koroFileHeader配置：[vscode 插件 koroFileHeader 配置 - 不邪 - 博客园 (cnblogs.com)](https://www.cnblogs.com/qiang-ling/p/15709455.html)
