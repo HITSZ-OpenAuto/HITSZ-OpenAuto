@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="19.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (chipImage, 'chip.png')</l>
+<l>read_image (boardImage, 'board.png')</l>
+<l>rgb1_to_gray(chipImage, chipImage)</l>
+<l>rgb1_to_gray(boardImage, boardImage)</l>
+<c></c>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_image (chipImage, 0, 0, -1, -1, WindowHandleforChip)</l>
+<l>set_display_font (WindowHandleforChip, 16, 'mono', 'true', 'false')</l>
+<l>dev_update_off ()</l>
+<l>dev_display (chipImage)</l>
+<c></c>
+<l>create_scaled_shape_model(chipImage, 'auto', 0, 3.14, 'auto', 0.5, 2.0, 'auto', 'auto', 'use_polarity', 'auto', 'auto', ModelID)</l>
+<c></c>
+<l>find_scaled_shape_model(boardImage, ModelID, 0, 3.14, 0.5, 2.0, 0.8, 1, 0.5, 'least_squares', 0.1, 0.4, Row, Column, Angle, Scale, Score)</l>
+<c></c>
+<l>dev_open_window_fit_image (boardImage, 0, 0, -1, -1, WindowHandleforBoard)</l>
+<l>set_display_font (WindowHandleforChip, 16, 'mono', 'true', 'false')</l>
+<l>dev_update_off ()</l>
+<l>dev_display (boardImage)</l>
+<c></c>
+<l>dev_display_shape_matching_results(ModelID, 'red', Row, Column, Angle, 1, 1, 0)</l>
+<l>disp_message (WindowHandleforBoard, 'Found NCC model, Score: '+Score, 'window', 12, 12, 'black', 'true')</l>
+<l>disp_message(WindowHandleforBoard, 'Position x: '+Column, 'window', 30, 12, 'black', 'true')</l>
+<l>disp_message(WindowHandleforBoard, 'Position y: '+Row, 'window', 45, 12, 'black', 'true')</l>
+<l>disp_message(WindowHandleforBoard, 'Angle: '+Angle, 'window', 60, 12, 'black', 'true')</l>
+<l>disp_message(WindowHandleforBoard, 'Scale: '+Scale, 'window', 75, 12, 'black', 'true')</l>
+<c></c>
+<l>while (1)</l>
+<c>    * Without this loop, the displaying window will disappear once showing</c>
+<l>endwhile</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
