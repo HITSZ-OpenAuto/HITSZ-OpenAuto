@@ -30,7 +30,7 @@
 3. 课程笔记
 4. 课程往年试卷
 5. 课程及对应老师评价
-6. 保研经验分享[保研分享会录屏](https://pan.baidu.com/s/1Obj_0-ayYCXo9hm2X492Mg?pwd=1234)
+6. 保研经验分享:【百度网盘】[保研分享会录屏](https://pan.baidu.com/s/1Obj_0-ayYCXo9hm2X492Mg?pwd=1234)
 7. 自动化野生技术自救指南
 
 本项目即将收录的内容：
