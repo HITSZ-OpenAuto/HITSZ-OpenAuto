@@ -14,6 +14,7 @@
 ## 关于实验课
 
 实验虽然会发实验代码，但不建议直接照抄，理解代码会对后期小车代码的编写调试大有裨益。
+
 另外，完成实验课上的附加题可获得额外加分。
 
 ### 前期
@@ -29,4 +30,4 @@
 后期老师会把实验室开放给学生，自行使用已有的零件搭建一辆能够巡线、使用机械臂、超声波避障的小车。小车会在期末进行考核，根据完成任务的情况打分。
 
 - 关于小车，欢迎访问 [MaxwellJay256](https://github.com/MaxwellJay256) 的仓库 [mega_12800](https://github.com/MaxwellJay256/mega_12800) 获取教程和经验分享！
-- 也欢迎访问 [longlin li](https://github.com/longlin10086)  的仓库 [HITSZ_lab_project](https://github.com/longlin10086/HITSZ_lab_project) 进行交流！
+- 也欢迎访问 [longlin li](https://github.com/longlin10086)  的仓库 [HITSZ_lab_project](https://github.com/longlin10086/HITSZ_lab_project) 获取教程和经验分享！
