@@ -1,5 +1,7 @@
 # 哈工大（深圳）自动化专业课程攻略 | HITSZ-OpenAuto
 
+## 百星纪念！HITSZ-OpenAuto将为大家持续提供更优质的学习资料服务
+
 感谢那些曾经对该项目作出贡献的同学，他们是（排名不分先后）：
 [MinghangLi](https://github.com/lmh12138)、[猪肚鸡](https://github.com/xander-2077)、[Yuming LIU](https://github.com/handleandwheel)、[Sylybimike](https://github.com/sylybimike2001)、[小红帽](https://github.com/hoshino-lr)、[山樵](https://github.com/EricTonyLiu)、[Lewis74](https://github.com/Lewis74CoLA)、[longlin li](https://github.com/longlin10086)、[尘息](https://github.com/chenxijun)、[TangLongbin](https://github.com/TangLongbin)、[Huang-Zifeng](https://github.com/Huang-Zifeng)、[OliverWu515](https://github.com/OliverWu515)、[Mixlining](https://github.com/Mixlining)、[Sieroy](https://github.com/Sieroy)、[Maxwell Jay](https://github.com/MaxwellJay256)……以及电脑前的您！
 
