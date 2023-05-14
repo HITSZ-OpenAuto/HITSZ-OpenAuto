@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="22.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'E:/作业/大三下/机器视觉/实验/IMAGES/1.jpg')</l>
+<c></c>
+<c>* 图片预处理</c>
+<l>rgb1_to_gray (Image, ImageGray)</l>
+<l>gauss_filter (ImageGray, ImageGauss, 5)</l>
+<c></c>
+<c>* 阈值化</c>
+<l>threshold(ImageGauss, Regions, 200, 255)</l>
+<c></c>
+<c>* 连通轮廓</c>
+<l>connection(Regions, ConnectedRegions)</l>
+<c></c>
+<c>* 选择感兴趣的区域,面积在1000到2500000之间</c>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 1000, 2500000)</l>
+<c></c>
+<c>* 边缘检测</c>
+<l>boundary (SelectedRegions, RegionBorder, 'inner')</l>
+<c>* 生成膨胀区域</c>
+<l>dilation_circle (RegionBorder, RegionDilation, 3.5)</l>
+<c>* 生成膨胀区域的并集</c>
+<l>union1 (RegionDilation, RegionUnion)</l>
+<c></c>
+<l>reduce_domain (Image, RegionUnion, ImageReduced)</l>
+<c>* 使用形状选择运算从连通区域中筛选出感兴趣的区域</c>
+<c>* 此处通过圆度、面积两个参数进行筛选出圆形轮廓</c>
+<l>edges_sub_pix(ImageReduced, edges_xld,'canny', 1, 50, 150)</l>
+<l>select_shape_xld (edges_xld, Selected_xld, ['circularity','area'], 'or', [0.7,1], [1,1])</l>
+<c></c>
+<c>* 生成ROI区域，用于寻找直线轮廓</c>
+<l>gen_rectangle1 (LineRegion, 29.3144, 614.91, 96.0652, 943.562)</l>
+<c>* 从ROI区域中提取直线轮廓</c>
+<l>reduce_domain (Image, LineRegion, Image_line)</l>
+<c>* 边缘检测</c>
+<l>edges_sub_pix (Image_line, Edges1, 'canny', 1, 20, 40)</l>
+<c>* 拟合直线</c>
+<c>* RowBegin为直线的起始点的行坐标，ColBegin为直线的起始点的列坐标</c>
+<c>* RowEnd为直线的终止点的行坐标，ColEnd为直线的终止点的列坐标</c>
+<l>fit_line_contour_xld (Edges1, 'huber', -1, 0, 5, 2, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)</l>
+<c>* 生成直线轮廓</c>
+<l>gen_region_line (Line, RowBegin, ColBegin, RowEnd, ColEnd)</l>
+<c></c>
+<c>* 显示结果,并等待用户按下按键</c>
+<l>dev_open_window_fit_image(Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_display(Image)</l>
+<c></c>
+<c>* 显示拟合直线结果</c>
+<l>dev_display(Line)</l>
+<c></c>
+<c>* 拟合圆形，计算两个圆形的距离</c>
+<l>count_obj (Selected_xld, NumSegments)</l>
+<c>* 创建数组，用于存储圆的圆心坐标</c>
+<l>* gen_empty_obj(ROWS)</l>
+<l>* gen_empty_obj(COLUMNS)</l>
+<l>create_matrix(1,1,0,ROWS)</l>
+<l>create_matrix(1,1,0,COLUMNS)</l>
+<c></c>
+<l>for i := 1 to NumSegments by 1</l>
+<l>    select_obj (Selected_xld, SingleSegment, i)</l>
+<c>    * 拟合圆</c>
+<c>    * fit_circle_contour_xld (SingleSegment, 'atukey', -1, 2, 0, 5, 2, Row[i-1], Column[i-1], Radius, StartPhi, EndPhi, PointOrder)</c>
+<c>    </c>
+<l>    fit_circle_contour_xld (SingleSegment, 'atukey', -1, 2, 0, 5, 2, Row, Column, Radius, StartPhi, EndPhi, PointOrder)</l>
+<l>    gen_circle_contour_xld (ContCircle, Row, Column, Radius, 0, rad(360), 'positive', 1)</l>
+<c>    </c>
+<l>    tuple_concat(ROWS,[Row],ROWS)</l>
+<l>    tuple_concat(COLUMNS,[Column],COLUMNS)</l>
+<c>    * 显示圆形的圆心坐标</c>
+<l>    disp_message(WindowHandle, 'Row: ' + Row, 'window', 330+i*30, 120, 'black', 'true')</l>
+<l>    disp_message(WindowHandle, 'Column: ' + Column, 'window', 330+i*30, 240, 'black', 'true')</l>
+<c>    * 画出拟合的圆形</c>
+<l>    dev_display (ContCircle)</l>
+<c>    * 显示圆形的半径</c>
+<l>    disp_message(WindowHandle, 'Radius: ' + Radius, 'window', 330+i*30, 12, 'black', 'true')</l>
+<l>endfor</l>
+<c></c>
+<c>* 计算两个圆心的距离</c>
+<l>Distance := sqrt((ROWS[2]-ROWS[1])*(ROWS[2]-ROWS[1])+(COLUMNS[2]-COLUMNS[1])*(COLUMNS[2]-COLUMNS[1]))</l>
+<c></c>
+<c>* 绘制一条线连接两个圆心，颜色为绿色</c>
+<l>gen_region_line (Line1, ROWS[1], COLUMNS[1], ROWS[2], COLUMNS[2])</l>
+<l>dev_set_color ('green')</l>
+<l>dev_display (Line1)</l>
+<c></c>
+<c>* 显示两个圆心的距离</c>
+<l>disp_message(WindowHandle, 'the distance between \n two circles\'s center ' + Distance, 'window', 460, 12, 'black', 'true')</l>
+<c></c>
+<c>* 计算大圆圆心到上述拟合出的直线的距离</c>
+<c>* 大圆为第一个圆</c>
+<l>Distance1 := abs((ROWS[1]-RowBegin)*(ColEnd-ColBegin)-(COLUMNS[1]-ColBegin)*(RowEnd-RowBegin))/sqrt((ColEnd-ColBegin)*(ColEnd-ColBegin)+(RowEnd-RowBegin)*(RowEnd-RowBegin))</l>
+<c></c>
+<c>* 绘制一条线，沿着垂直直线的方向，连接大圆圆心和直线</c>
+<l>gen_region_line (Line2, ROWS[1], COLUMNS[1], ROWS[1]+(ColEnd-ColBegin), COLUMNS[1]+(RowEnd-RowBegin))</l>
+<l>dev_display (Line2)</l>
+<c></c>
+<c>* 显示圆心到直线的距离</c>
+<l>disp_message(WindowHandle, 'the distance between \n the big circles\'s center and line ' + Distance1, 'window', 460, 200, 'black', 'true')</l>
+<c></c>
+<c>* 等待用户按下按键后关闭窗口</c>
+<l>read_char(WindowHandle,Key,Code)</l>
+<l>if(Key != 'none') </l>
+<l>  dev_close_window()</l>
+<l>endif</l>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
