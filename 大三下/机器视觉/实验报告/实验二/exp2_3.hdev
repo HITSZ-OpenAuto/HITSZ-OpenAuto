@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="22.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c as_id="matching" as_name="Matching 01" as_grp="[0]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[0]" as_ord="2">* Matching 01: ************************************************</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[0]" as_ord="3">* Matching 01: BEGIN of generated code for model initialization</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[0]" as_ord="4">* Matching 01: ************************************************</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[0]" as_ord="5">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,1]" as_ord="1">* Matching 01: Obtain the model image</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,1,1]" as_ord="2">read_image (Image, 'E:/作业/大三下/机器视觉/实验/IMAGES/1.jpg')</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,2]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,2]" as_ord="2">* Matching 01: Build the ROI from basic regions</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,1,2]" as_ord="3">gen_rectangle1 (ModelRegion, 94.8469, 482.005, 444.888, 672.644)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,3]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,3]" as_ord="2">* Matching 01: Reduce the model template</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,1,3]" as_ord="3">reduce_domain (Image, ModelRegion, TemplateImage)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,4]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,4]" as_ord="2">* Matching 01: Create and train the shape model</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,1,4]" as_ord="3">create_generic_shape_model (ModelID)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,1,4]" as_ord="4">* Matching 01: set the model parameters</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,1,4]" as_ord="5">set_generic_shape_model_param (ModelID, 'metric', 'use_polarity')</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,1,4]" as_ord="6">train_generic_shape_model (TemplateImage, ModelID)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,2]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,2]" as_ord="2">* Matching 01: Get the model contour for transforming it later into the image</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,2]" as_ord="3">get_shape_model_contours (ModelContours, ModelID, 1)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="2">* Matching 01: Support for displaying the model</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="3">* Matching 01: Get the reference position</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="4">area_center (ModelRegion, ModelRegionArea, RefRow, RefColumn)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="5">vector_angle_to_rigid (0, 0, 0, RefRow, RefColumn, 0, HomMat2D)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="6">affine_trans_contour_xld (ModelContours, TransContours, HomMat2D)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="7">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="8">* Matching 01: Display the model contours</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="9">dev_display (Image)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="10">dev_set_color ('green')</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="11">dev_set_draw ('margin')</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="12">dev_display (ModelRegion)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="13">dev_display (TransContours)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[1,4]" as_ord="14">stop ()</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[2]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[2]" as_ord="2">* Matching 01: END of generated code for model initialization</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[3,1]" as_ord="1">* Matching 01:  * * * * * * * * * * * * * * * * * * * * * * *</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[3,1]" as_ord="2">* Matching 01: BEGIN of generated code for model application</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[3,2]" as_ord="1">* Matching 01: Set the search paramaters</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[3,2]" as_ord="2">set_generic_shape_model_param (ModelID, 'border_shape_models', 'false')</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[4]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[4]" as_ord="2">* Matching 01: Loop over all specified test images</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[4]" as_ord="3">TestImages := ['E:/作业/大三下/机器视觉/实验/IMAGES/1.jpg','E:/作业/大三下/机器视觉/实验/IMAGES/2.jpg','E:/作业/大三下/机器视觉/实验/IMAGES/3.jpg','E:/作业/大三下/机器视觉/实验/IMAGES/4.jpg']</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[4]" as_ord="4">for T := 0 to 3 by 1</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[5]" as_ord="1">    * </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[5]" as_ord="2">    * Matching 01: Obtain the test image</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[5]" as_ord="3">    read_image (Image, TestImages[T])</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[6]" as_ord="1">    * </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[6]" as_ord="2">    * Matching 01: Find the model</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[6]" as_ord="3">    find_generic_shape_model (Image, ModelID, MatchResultID, NumMatchResult)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[7,0]" as_ord="1">    * </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[7,0]" as_ord="2">    * Matching 01: Retrieve results</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,0]" as_ord="3">    for I := 0 to NumMatchResult-1 by 1</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[7,1]" as_ord="1">        * </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[7,1]" as_ord="2">        * Matching 01: Display the detected match</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,1]" as_ord="3">        dev_display (Image)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,1]" as_ord="4">        get_generic_shape_model_result_object (MatchContour, MatchResultID, I, 'contours')</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,1]" as_ord="5">        dev_set_color ('green')</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,1]" as_ord="6">        dev_display (MatchContour)</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="1">        * </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="2">        * Matching 01: Retrieve parameters of the detected match</c>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="3">        get_generic_shape_model_result (MatchResultID, I, 'row', Row)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="4">        get_generic_shape_model_result (MatchResultID, I, 'column', Column)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="5">        get_generic_shape_model_result (MatchResultID, I, 'angle', Angle)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="6">        get_generic_shape_model_result (MatchResultID, I, 'scale_row', ScaleRow)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="7">        get_generic_shape_model_result (MatchResultID, I, 'scale_column', ScaleColumn)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="8">        get_generic_shape_model_result (MatchResultID, I, 'hom_mat_2d', HomMat2D)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,2]" as_ord="9">        get_generic_shape_model_result (MatchResultID, I, 'score', Score)</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,3]" as_ord="1">        stop ()</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[7,3]" as_ord="2">    endfor</l>
+<l as_id="matching" as_name="Matching 01" as_grp="[10]" as_ord="1">endfor</l>
+<c as_id="matching" as_name="Matching 01" as_grp="[11]" as_ord="1">* </c>
+<c as_id="matching" as_name="Matching 01" as_grp="[12]" as_ord="1">* Matching 01: *******************************************</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[12]" as_ord="2">* Matching 01: END of generated code for model application</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[12]" as_ord="3">* Matching 01: *******************************************</c>
+<c as_id="matching" as_name="Matching 01" as_grp="[12]" as_ord="4">* </c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
