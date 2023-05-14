@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="22.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c as_id="matching" as_name="Matching 02" as_grp="[0]" as_ord="1">* </c>
+<c>* Matching 02: ************************************************</c>
+<c>* Matching 02: BEGIN of generated code for model initialization</c>
+<c>* Matching 02: ************************************************</c>
+<c>* </c>
+<c>* Matching 02: Obtain the model image</c>
+<l>read_image (Image, 'E:/作业/大三下/机器视觉/实验/OCR/1.1.jpg')</l>
+<c>* </c>
+<c>* Matching 02: Build the ROI from basic regions</c>
+<l>gen_rectangle2 (ModelRegion, 334.763, 305.366, rad(-94.1549), 68.2602, 36.4795)</l>
+<c>* </c>
+<c>* Matching 02: Reduce the model template</c>
+<l>reduce_domain (Image, ModelRegion, TemplateImage)</l>
+<c>* </c>
+<c>* Matching 02: Create and train the shape model</c>
+<l>create_generic_shape_model (ModelID)</l>
+<c>* Matching 02: set the model parameters</c>
+<l>set_generic_shape_model_param (ModelID, 'metric', 'use_polarity')</l>
+<l>train_generic_shape_model (TemplateImage, ModelID)</l>
+<c>* </c>
+<c>* Matching 02: Get the model contour for transforming it later into the image</c>
+<l>get_shape_model_contours (ModelContours, ModelID, 1)</l>
+<c>* </c>
+<c>* Matching 02: Support for displaying the model</c>
+<c>* Matching 02: Get the reference position</c>
+<l>area_center (ModelRegion, ModelRegionArea, RefRow, RefColumn)</l>
+<l>vector_angle_to_rigid (0, 0, 0, RefRow, RefColumn, 0, HomMat2D)</l>
+<l>affine_trans_contour_xld (ModelContours, TransContours, HomMat2D)</l>
+<c>* </c>
+<c>* Matching 02: Display the model contours</c>
+<l>dev_open_window_fit_image(Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_update_off ()</l>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('green')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (ModelRegion)</l>
+<l>dev_display (TransContours)</l>
+<l>disp_message(WindowHandle, 'Created model template', 'window', 12, 12, 'black', 'true')</l>
+<c>* 等待用户按下按键后关闭窗口</c>
+<l>read_char(WindowHandle,Key,Code)</l>
+<l>if(Key != 'none') </l>
+<c>  </c>
+<l>endif</l>
+<c></c>
+<c>* </c>
+<c>* Matching 02: END of generated code for model initialization</c>
+<c>* Matching 02:  * * * * * * * * * * * * * * * * * * * * * * *</c>
+<c>* Matching 02: BEGIN of generated code for model application</c>
+<c>* Matching 02: Set the search paramaters</c>
+<l>set_generic_shape_model_param (ModelID, 'angle_start', rad(-21))</l>
+<l>set_generic_shape_model_param (ModelID, 'border_shape_models', 'false')</l>
+<c>* </c>
+<c>* Matching 02: Loop over all specified test images</c>
+<l>TestImages := ['E:/作业/大三下/机器视觉/实验/OCR/1.1.jpg','E:/作业/大三下/机器视觉/实验/OCR/1.2.jpg','E:/作业/大三下/机器视觉/实验/OCR/1.3.jpg','E:/作业/大三下/机器视觉/实验/OCR/1.4.jpg']</l>
+<l>for T := 0 to 3 by 1</l>
+<c>    * </c>
+<c>    * Matching 02: Obtain the test image</c>
+<l>    read_image (Image, TestImages[T])</l>
+<c>    * </c>
+<c>    * Matching 02: Find the model</c>
+<l>    find_generic_shape_model (Image, ModelID, MatchResultID, NumMatchResult)</l>
+<c>    * </c>
+<c>    * Matching 02: Retrieve results</c>
+<l>    for I := 0 to NumMatchResult-1 by 1</l>
+<c>        * </c>
+<c>        * Matching 02: Display the detected match</c>
+<l>        dev_display (Image)</l>
+<l>        get_generic_shape_model_result_object (MatchContour, MatchResultID, I, 'contours')</l>
+<l>        dev_set_color ('green')</l>
+<l>        dev_display (MatchContour)</l>
+<c>        * </c>
+<c>        * Matching 02: Retrieve parameters of the detected match</c>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'row', Row)</l>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'column', Column)</l>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'angle', Angle)</l>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'scale_row', ScaleRow)</l>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'scale_column', ScaleColumn)</l>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'hom_mat_2d', HomMat2D)</l>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'score', Score)</l>
+<l>    endfor</l>
+<c>    * </c>
+<c>    * Matching 02: Code for rectification of the image</c>
+<c>    * Matching 02: Calculate the hom_mat2d for the model</c>
+<l>    hom_mat2d_identity (HomMat2DModel)</l>
+<l>    hom_mat2d_translate (HomMat2DModel, RefRow, RefColumn, HomMat2DModel)</l>
+<l>    for I := 0 to NumMatchResult-1 by 1</l>
+<c>        * Matching 02: Calculate an inverse hom_mat2d for each of the matching results</c>
+<l>        get_generic_shape_model_result (MatchResultID, I, 'hom_mat_2d', HomMat2D)</l>
+<l>        hom_mat2d_invert (HomMat2D, HomMat2DMatchInvert)</l>
+<l>        hom_mat2d_compose (HomMat2DModel, HomMat2DMatchInvert, RectificationHomMat2D)</l>
+<l>        affine_trans_image (Image, RectifiedImage, RectificationHomMat2D, 'constant', 'false')</l>
+<c>        * </c>
+<c>        * Matching 02: Insert your code using the rectified image here</c>
+<c>        </c>
+<c>        * 转为灰度图</c>
+<l>        rgb1_to_gray(RectifiedImage, GrayImage)</l>
+<c>        </c>
+<c>        * 二值化</c>
+<l>        threshold(GrayImage, Regions, 127, 255)</l>
+<c>        </c>
+<c>        * 进行膨胀，使得汉字结构连在一起</c>
+<l>        dilation_circle(Regions, RegionsDilation, 5.5)</l>
+<c>        </c>
+<c>        * 连通域分析</c>
+<l>        connection(RegionsDilation, ConnectedRegions)</l>
+<c>        </c>
+<c>        * 选择面积在1000-7000之间的区域</c>
+<l>        select_shape(ConnectedRegions, SelectedRegions, 'area', 'and', 1000, 7000)</l>
+<c>        </c>
+<c>        * 排列区域</c>
+<c>        * 按照区域的第一个点的x坐标进行排序</c>
+<l>        sort_region(SelectedRegions, SortedRegions, 'first_point','true','column')</l>
+<c>        </c>
+<c>        * 此时最左侧的区域正常情况下为汉字</c>
+<c>        * 则此时将第一个区域排除，从第二个区域开始进行字符识别</c>
+<c>        </c>
+<c>        * 统计当前区域数量</c>
+<l>        count_obj(SortedRegions,Number1)</l>
+<c>        </c>
+<c>        * for循环，将第二个区域后的区域放入数组中</c>
+<l>        gen_empty_obj (new_region_array)</l>
+<l>        for index:=2 to Number1 by 1</l>
+<l>            select_obj(SortedRegions, current_region, index)</l>
+<l>            concat_obj (new_region_array, current_region, new_region_array)</l>
+<l>        endfor</l>
+<c>        </c>
+<c>        * 读取OCR训练文件</c>
+<l>        read_ocr_class_mlp('Document_0-9A-Z_NoRej.omc',OCRHandle)</l>
+<c>        </c>
+<l>        invert_image(RectifiedImage, ImageInvert)</l>
+<c>        </c>
+<c>        * 识别字符</c>
+<l>        do_ocr_multi_class_mlp(new_region_array, ImageInvert, OCRHandle, Class, Confidence)</l>
+<c>        </c>
+<l>        count_obj(new_region_array, Number)</l>
+<l>        for index:=0 to Number-1 by 1</l>
+<l>            disp_message(WindowHandle, Class[index], 'window', 12, 12+index*15, 'black', 'true')</l>
+<l>        endfor</l>
+<c>        * 等待用户按下按键后关闭窗口</c>
+<l>        read_char(WindowHandle,Key,Code)</l>
+<l>        if(Key != 'none') </l>
+<c>           </c>
+<l>        endif</l>
+<c></c>
+<c></c>
+<l>    endfor</l>
+<l>endfor</l>
+<c>* 等待用户按下按键后关闭窗口</c>
+<l>read_char(WindowHandle,Key,Code)</l>
+<l>if(Key != 'none') </l>
+<l>    dev_close_window()</l>
+<l>endif</l>
+<c>* </c>
+<c>* Matching 02: *******************************************</c>
+<c>* Matching 02: END of generated code for model application</c>
+<c>* Matching 02: *******************************************</c>
+<c>* </c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
