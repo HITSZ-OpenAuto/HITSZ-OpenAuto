@@ -2,7 +2,98 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : Main program body\ 
+  * @author         : »Æ¼Ì·² huangjifan
+  * @date           : 2023-05-21
+  * @description:   
+  * ×Ô¶¯¿ØÖÆÊµ¼ù×ÛºÏÊµÑé´úÂë×ÛºÏ
+  * Integrated Code for Automatic Control Practical Comprehensive Experiment
+  * @version        : 1.0.0
+  ******************************************************************************
+  * @detailed_description:
+  * ±¾´úÂëÎª×Ô¶¯¿ØÖÆÊµ¼ù×ÛºÏÊµÑé´úÂë×ÛºÏ£¬°üº¬ÁË»ØÁã¡¢É¨Æµ¡¢½×Ô¾¡¢¸úËæµÈ¹¦ÄÜ
+  * 
+  * »·¾³ËµÃ÷£º
+  * 1. ±¾´úÂëÊ¹ÓÃMotorControlWorkbenchÈí¼şÉú³Éµç»úÇı¶¯´úÂë£¬°æ±¾Îª5.2.0
+  * 2. ±¾´úÂëÔÚSTM32CubeMX 6.1.0°æ±¾ÏÂÉú³É£¬Ê¹ÓÃÁËHAL¿â£¬°æ±¾Îª1.7.10
+  * 3. ±¾´úÂëÊ¹ÓÃÁËmotorcontrol¿â£¬°æ±¾ÓÉMotorControlWorkbenchÈ·¶¨
+  * 4. ±¾´úÂëÔÚKeil MDK 5.37.0°æ±¾ÏÂ±àÒëÍ¨¹ı
+  * 
+  * ¹¦ÄÜËµÃ÷£º
+  * ¸÷¸öÖ÷Òª¹¦ÄÜ¶¨ÒåÁËÏà¹ØµÄ±äÁ¿£¬ÆäÖĞ²¼¶û±äÁ¿ÓÃÓÚ¿ØÖÆ³ÌĞòµÄÖ´ĞĞÁ÷³ÌºÍ¹¦ÄÜµÄ¿ªÆô
+  * ¸÷¸ö±äÁ¿µÄÖ÷Òª¹¦ÄÜÈçÏÂ£º
+  * 1. »ØÁã£ºfind_home_flag             ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞ»ØÁã²Ù×÷
+  * 2. É¨Æµ£ºsweep_identification_flag  ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞÉ¨Æµ±æÊ¶²Ù×÷
+  * 3. ½×Ô¾£ºstep_test_flag             ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞ½×Ô¾²Ù×÷
+  * 4. ¸úËæ£ºfollow_test_flag           ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞÉ¨Æµ¸úËæ²Ù×÷
+  * ¹¦ÄÜµÄ¾ßÌå×÷ÓÃÇë½áºÏÊµÑéÖ¸µ¼Êé½øĞĞÀí½â
+  * 
+  * °´¼üËµÃ÷£º
+  * °´¼üÉèÖÃÎªinputÄ£Ê½£¬ÆäÖĞKEY1Îªworkbench¿âÄ¬ÈÏÆôÍ£°´¼ü£¬ÈÔÎªÍâ²¿ÖĞ¶ÏÄ£Ê½
+  * KEY2°´¼ü°´ÏÂºó£¬µç»ú»ØÁã²»¿ÉÖĞ¶Ï£¬»ØÁãÍê³Éºó×Ô¶¯Í£Ö¹»ØÁã¹¦ÄÜ
+  * KEY3~5°´¼ü°´ÏÂºóÆô¶¯¶ÔÓ¦µÄ¹¦ÄÜ£¬ÔÙ´Î°´ÏÂÔòÍ£Ö¹¶ÔÓ¦µÄ¹¦ÄÜ
+  * 1. °´¼üKEY1£ºÒı½Å-PE0£¬¹¦ÄÜ-µç»úÆôÍ£
+  * 2. °´¼üKEY2£ºÒı½Å-PE1£¬¹¦ÄÜ-µç»ú»ØÁã
+  * 3. °´¼üKEY3£ºÒı½Å-PE2£¬¹¦ÄÜ-É¨Æµ±æÊ¶
+  * 4. °´¼üKEY4£ºÒı½Å-PE3£¬¹¦ÄÜ-½×Ô¾²âÊÔ
+  * 5. °´¼üKEY5£ºÒı½Å-PE4£¬¹¦ÄÜ-É¨Æµ¸úËæ
+  * ¿ÉÒÔ½áºÏRESET°´¼ü¸´Î»µ¥Æ¬»ú
+  * 
+  * ±àÂëÆ÷ËµÃ÷£º    ±¾³ÌĞòÊ¹ÓÃTIM3×÷Îª±àÂëÆ÷µÄ¼ÆÊıÆ÷£¬¼ÆÊıÆ÷µÄ¼ÆÊı·¶Î§Îª0~65535
+  *                ¶ÔÓÚ¼ÆÊıÆ÷Òç³öµÄÇé¿ö£¬³ÌĞòÖĞÒÑ¾­×öÁË´¦Àí£¬²»ĞèÒª¶îÍâ´¦Àí
+  *                ¿ÉÒÔ²é¿´Get_Encoder_Ruler_Count(void)º¯ÊıµÄÊµÏÖ£¬ÆäÖĞÓĞÁ½ÖÖ´¦Àí·½Ê½£¬¿ÉÒÔ×ÔĞĞÑ¡Ôñ
+  * 
+  * ´®¿ÚËµÃ÷£º      ±¾³ÌĞòÊ¹ÓÃuart5×÷ÎªÓëÉÏÎ»»úÍ¨ĞÅµÄ´®¿Ú£¬²¨ÌØÂÊÎª115200
+  * 
+  * debugÄ£Ê½ËµÃ÷£º Ê¹ÓÃ²¼¶û±äÁ¿ debug ¿ØÖÆÊÇ·ñ¿ªÆôdebugÄ£Ê½
+  *                debugÄ£Ê½ÏÂ»áÊä³öÒ»Ğ©µ÷ÊÔĞÅÏ¢£¬×¢ÒâÓëmatlabµÄÍ¨ĞÅ»á´æÔÚ¸ÉÈÅ
+  * 
+  * ¿ØÖÆÆ÷ËµÃ÷£º    ½×Ô¾²âÊÔ¡¢É¨Æµ¸ú×Ù¹¦ÄÜĞèÒªÊ¹ÓÃ¿ØÖÆÆ÷
+  *                ±¾³ÌĞòÊ¹ÓÃÁËÀëÉ¢»¯ºóµÄ¿ØÖÆÆ÷£¬¾ßÌåÊµÏÖÔÚdiscrete_control_func()º¯ÊıÖĞ
+  *                ¿ÉÒÔ¸ù¾İÊ¹ÓÃµÄµç»úÏµÍ³±æÊ¶½á¹û£¬Éè¼Æ¿ØÖÆÆ÷²¢ĞŞ¸Ä¸Ãº¯ÊıµÄÊµÏÖ
+  ******************************************************************************
+  * @detailed_description:
+  * This code is the integrated code for the comprehensive experiment of automatic control practice, 
+  * which includes functions such as return to zero, sweep, step, and follow
+  * 
+  * Environment description:
+  * 1. This code uses MotorControlWorkbench software to generate motor drive code, version 5.2.0
+  * 2. This code is generated under STM32CubeMX 6.1.0, using HAL library, version 1.7.10
+  * 3. This code uses the motorcontrol library, the version is determined by MotorControlWorkbench
+  * 4. This code is compiled through Keil MDK 5.37.0
+  * 
+  * Function description:
+  * The main functions define related variables, among which boolean variables are used to control the execution flow of the program and the opening of functions
+  * The main functions of each variable are as follows:
+  * 1. Return to zero: find_home_flag is used to control whether to execute the return to zero operation
+  * 2. Sweep: sweep_identification_flag is used to control whether to execute the sweep identification operation
+  * 3. Step: step_test_flag is used to control whether to execute the step operation
+  * 4. Follow: follow_test_flag is used to control whether to execute the sweep follow operation
+  * The specific functions of the function, please refer to the experimental guide for understanding
+  * 
+  * Key description:
+  * The key is set to input mode, where KEY1 is the workbench library default start/stop key, which is still external interrupt mode
+  * After KEY2 is pressed, the motor cannot be interrupted by returning to zero, and the return to zero will stop automatically after completion
+  * After KEY3~5 is pressed, the corresponding function is started, and then pressed again to stop the corresponding function
+  * 1. KEY1: Pin-PE0, Function-Motor Start/Stop
+  * 2. KEY2: Pin-PE1, Function-Motor Return to Zero
+  * 3. KEY3: Pin-PE2, Function-Sweep Identification
+  * 4. KEY4: Pin-PE3, Function-Step Test
+  * 5. KEY5: Pin-PE4, Function-Sweep Follow
+  * You can combine the RESET button to reset the microcontroller
+  * 
+  * Encoder description: This program uses TIM3 as the counter of the encoder, and the counter range is 0~65535
+  * For the case of counter overflow, the program has been processed and no additional processing is required
+  * You can check the implementation of the Get_Encoder_Ruler_Count(void) function, where there are two processing methods, you can choose
+  * 
+  * Serial port description: This program uses uart5 as the serial port for communication with the upper computer, and the baud rate is 115200
+  * 
+  * Debug mode description: Use the boolean variable debug to control whether to turn on the debug mode
+  * Debug mode will output some debugging information, pay attention to the interference with matlab communication
+  * 
+  * Controller description: The step test and sweep tracking functions need to use the controller
+  * This program uses the discretized controller, the specific implementation is in the discrete_control_func() function
+  * According to the identification results of the motor system used, design the controller and modify the implementation of the function
   ******************************************************************************
   * @attention
   *
@@ -17,7 +108,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "motorcontrol.h"
@@ -33,11 +123,31 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+typedef struct
+{
+  unsigned int t_0;
+  unsigned int t_01;
+  float f0;
+  float f1;
+  float k;
+  float p;
+  float A;
+}my_sweep_t;
+
+typedef struct 
+{ 
+  uint8_t start_flag; /*Ö¡µÄÆğÊ¼±êÖ¾*/
+  uint8_t frame_len; /*Ö¡µÄ³¤¶ÈĞÅÏ¢*/ 
+  uint8_t header_check; /*Ö¡Í·µÄÇóºÍĞ£Ñé*/ 
+  uint8_t data_buf[12]; /*Êı¾İ³¤¶È£¬ÕâÀïÑ¡Ôñ¹Ì¶¨µÄÊı¾İ³¤¶È*/ 
+  uint8_t frame_check; /*Ö¡Í·+Êı¾İµÄÇóºÍĞ£Ñé,ÓÃÓÚ½ÓÊÕ·½Ğ£ÑéÊı¾İµÄÍêºÃĞÔ*/ 
+}frame_matlab_t; /*Êı¾İÖ¡½á¹¹Ìå*/
 
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define PI 3.14159265358979323846
 
 /* USER CODE END PD */
 
@@ -60,31 +170,50 @@ UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-// ç¼–ç å™¨ç›¸å…³å˜é‡
-// è®°å½•ç”µæœºå½“å‰ä½ç½®
+// ±àÂëÆ÷Ïà¹Ø±äÁ¿
+// ¼ÇÂ¼µç»úµ±Ç°Î»ÖÃ
 int32_t ENCODER_RULER_TIM_PERIOD=0;
-// è®°å½•ç¼–ç å™¨æº¢å‡ºæ¬¡æ•°
-int32_t encoder_ruler_overflow_count=0;
 float pos=0;
-// å¸ƒå°”å€¼ï¼Œåˆ¤æ–­ç”µæœºæ˜¯å¦åˆ°è¾¾å·¦å³ä¸¤ä¾§
+
+// ²¼¶ûÖµ£¬ÅĞ¶Ïµç»úÊÇ·ñµ½´ï×óÓÒÁ½²à
 bool encoder_ruler_left_limit_flag=false;
 bool encoder_ruler_right_limit_flag=false;
-// ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
+// Á½²àÎ»ÖÃµÄ±ê¶¨Öµ
 float encoder_ruler_left_limit=0;
 float encoder_ruler_right_limit=0;
-// ä¸­é—´ä½ç½®çš„æ ‡å®šå€¼
+// ÖĞ¼äÎ»ÖÃµÄ±ê¶¨Öµ
 float encoder_ruler_middle=0;
-// å¸ƒå°”å€¼ï¼Œåˆ¤æ–­æ˜¯å¦å·²ç»å®Œæˆäº†ä¸¤ä¾§ä½ç½®çš„æ ‡å®š
+// ²¼¶ûÖµ£¬ÅĞ¶ÏÊÇ·ñÒÑ¾­Íê³ÉÁËÁ½²àÎ»ÖÃµÄ±ê¶¨
 bool encoder_ruler_limit_calibrated=false;
-// å¸¸é‡å€¼ï¼Œç”µæœºåˆ°è¾¾ä¸­é—´ä½ç½®çš„ä½™é‡
+// ³£Á¿Öµ£¬µç»úµ½´ïÖĞ¼äÎ»ÖÃµÄÓàÁ¿
 const float middle_limit=2;
-// å¸ƒå°”å€¼ï¼Œåˆ¤æ–­æ˜¯å¦è¿›è¡Œä¸­é—´ä½ç½®å¤ä½
-bool GoHome_action_Flag = false;
-// åˆ¤æ–­ç”µæœºæ˜¯å¦å·²ç»è¿›è¡Œè¿‡å¤ä½åŠ¨ä½œ
-bool GoHome_Flag = false;
-// debugæ¨¡å¼
-// bool debug = false;
-bool debug = true;
+
+// debugÄ£Ê½
+bool debug = false;   // ¹Ø±ÕdebugÄ£Ê½
+// bool debug = true; // ´ò¿ªdebugÄ£Ê½
+
+// ========¹¦ÄÜ¿ª¹Ø£º»ØÁã========
+// Ö´ĞĞ»ØÁã²Ù×÷
+bool find_home_flag = false;
+// Ã¿´Î»ØÁã²Ù×÷ÊÇ·ñÊ×ÏÈ½øĞĞ±ê¶¨
+bool re_calibrate_flag = true;
+// bool re_calibrate_flag = false;
+
+// ========¹¦ÄÜ¿ª¹Ø£ºÉ¨Æµ========
+// É¨Æµ²âÊÔ¿ØÖÆ
+bool sweep_identification_flag = false;
+// É¨ÆµÊÇ·ñĞèÒªÖØĞÂ³õÊ¼»¯
+bool sweep_reinit_flag = false;
+
+// ========¹¦ÄÜ¿ª¹Ø£º½×Ô¾========
+// ½×Ô¾²âÊÔ¿ØÖÆ
+bool step_test_flag = false;
+// ±íÃ÷³ÌĞò°´ÏÂ¶ÔÓ¦°´¼üºóÊ×´ÎÖ´ĞĞ½×Ô¾º¯Êı
+bool step_first_flag = true;
+
+// ========¹¦ÄÜ¿ª¹Ø£º¸úËæ========
+// É¨Æµ¸úËæ²âÊÔ
+bool follow_test_flag = false;
 
 /* USER CODE END PV */
 
@@ -103,11 +232,95 @@ static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 float Get_Encoder_Ruler_Count(void);
 
-// æ£€æµ‹é™ä½å™¨ä¿¡å·ï¼Œåˆ¤æ–­ç”µæœºæ˜¯å¦åˆ°è¾¾ä¸¤ä¾§
-// å…¶ä¸­PG1å¼•è„šä¸ºæ­£é™ä½ï¼ŒPG0å¼•è„šä¸ºè´Ÿé™ä½
+// [GENERAL] µ¥¸ö°´¼ü´¦Àíº¯Êı£¬½øĞĞÏû¶¶´¦Àí
+// ´«ÈëÒª½øĞĞ¼ì²âµÄ°´¼üµÄGPIO_Pin£¬·µ»Ø°´¼üÊÇ·ñ°´ÏÂ
+bool single_key_detect(uint16_t GPIO_Pin)
+{
+  // °´¼ü°´ÏÂ
+  if(HAL_GPIO_ReadPin(GPIOE, GPIO_Pin) == GPIO_PIN_RESET)
+  {
+    // °´¼ü°´ÏÂ£¬µÈ´ı°´¼üÊÍ·Å
+    while(HAL_GPIO_ReadPin(GPIOE, GPIO_Pin) == GPIO_PIN_RESET);
+    // °´¼üÊÍ·Å£¬·µ»Øtrue
+    return true;
+  }
+  // °´¼üÎ´°´ÏÂ£¬·µ»Øfalse
+  else
+  {
+    return false;
+  }
+}
+
+// [GENERAL] °´¼ü´¦Àíº¯Êı
+void keys_detect()
+{
+  // PE1ÒÑÉèÖÃ±êÇ©Î»GoHome
+  // Èô°´¼üÎªPE1£¬find_home_flagÖÃÎªtrue
+  if(single_key_detect(Go_Home_Pin))
+  {
+    MC_StartMotor1();
+    find_home_flag = true;
+    // ÖØĞÂ±ê¶¨±àÂëÆ÷
+    if(re_calibrate_flag)
+    {
+      encoder_ruler_left_limit_flag=false;
+      encoder_ruler_right_limit_flag=false;
+      encoder_ruler_limit_calibrated=false;
+    }
+  }
+  // Èô°´¼üÎªPE2£¬sweep_test_flag½øĞĞ·­×ª
+  // ÔÊĞí½øĞĞÉ¨Æµ±æÊ¶²âÊÔ
+  if(single_key_detect(Key_3_Pin))
+  {
+    MC_ProgramSpeedRampMotor1(0, 0);
+    sweep_identification_flag = !sweep_identification_flag;
+    // ÖØĞÂ½øĞĞÉ¨Æµ³õÊ¼»¯
+    sweep_reinit_flag = true;
+    // Í£Ö¹É¨ÆµÊ±£¬½«µç»úÍ£Ö¹
+    if(sweep_identification_flag==false)
+    {
+      MC_StopMotor1();
+    }
+    else
+    {
+      MC_StartMotor1();
+    }
+  }
+
+  // Èô°´¼üÎªPE3£¬step_test_flag½øĞĞ·­×ª
+  // ÔÊĞí½øĞĞ½×Ô¾²âÊÔ
+  if(single_key_detect(Key_4_Pin))
+  {
+    MC_StartMotor1();
+    step_test_flag = !step_test_flag;
+    // µ±Ç°Ò»ÂÖ½×Ô¾²âÊÔ£¬º¯ÊıÊ×´ÎÖ´ĞĞ
+    step_first_flag = true;
+    if(step_test_flag==false)
+    {
+      MC_StopMotor1();
+    }
+  }
+
+  // Èô°´¼üÎªPE4£¬follow_test_flag½øĞĞ·­×ª
+  // ÔÊĞí½øĞĞÉ¨Æµ¸úËæ²âÊÔ
+  if(single_key_detect(Key_5_Pin))
+  {
+    MC_ProgramSpeedRampMotor1(0, 0);
+    MC_StartMotor1();
+    follow_test_flag = !follow_test_flag;
+    if(follow_test_flag==false)
+    {
+      MC_StopMotor1();
+    }
+  }
+}
+
+// [TASK-2]
+// Á½²àÏŞÎ»Æ÷ĞÅºÅ£¬ÅĞ¶Ïµç»úÊÇ·ñµ½´ïÁ½²à
+// ÆäÖĞPG1Òı½ÅÎªÕıÏŞÎ»£¬PG0Òı½ÅÎª¸ºÏŞÎ»
 void Judge_Limit_signal()
 {
-  // ç”µæœºåˆ°è¾¾å·¦ä¾§
+  // µç»úµ½´ï×ó²à
   if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_1)==GPIO_PIN_RESET)
   {
     encoder_ruler_left_limit_flag=true;
@@ -115,7 +328,7 @@ void Judge_Limit_signal()
     if (debug)
       printf("Left Limit!\r\n");
   }
-  // ç”µæœºåˆ°è¾¾å³ä¾§
+  // µç»úµ½´ïÓÒ²à
   else if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_0)==GPIO_PIN_RESET)
   {
     encoder_ruler_right_limit_flag=true;
@@ -125,81 +338,81 @@ void Judge_Limit_signal()
   }
 }
 
-// å¯»æ‰¾å·¦å³ä¸¤ä¾§çš„ä½ç½®ï¼Œè¿›è¡Œä½ç½®æ ‡å®š
+// [TASK-2] Ñ°ÕÒ×óÓÒÁ½²àµÄÎ»ÖÃ£¬½øĞĞÎ»ÖÃ±ê¶¨
 void Calibrate_Encoder_Ruler_Limit()
 {
-  // å½“æ²¡æœ‰å®Œæˆç”µæœºä½ç½®æ ‡å®šæ—¶ï¼Œæ§åˆ¶ç”µæœºè½¬åŠ¨
+  // µ±Ã»ÓĞÍê³Éµç»úÎ»ÖÃ±ê¶¨Ê±£¬¿ØÖÆµç»ú×ª¶¯
   while(!encoder_ruler_limit_calibrated)
   {
-    // è·å–å½“å‰ä½ç½®
+    // »ñÈ¡µ±Ç°Î»ÖÃ
     pos=Get_Encoder_Ruler_Count();
-    // æ£€æµ‹é™ä½å™¨ä¿¡å·ï¼Œåˆ¤æ–­ç”µæœºæ˜¯å¦åˆ°è¾¾ä¸¤ä¾§ï¼Œæ›´æ–°æ ‡å¿—ä½
+    // Á½²àÏŞÎ»Æ÷ĞÅºÅ£¬ÅĞ¶Ïµç»úÊÇ·ñµ½´ïÁ½²à£¬¸üĞÂ±êÖ¾Î»
     Judge_Limit_signal();
-    // ç”µæœºæ§åˆ¶æ–¹æ³•ä¸ºç»™å®šç”µæœºä¸€ä¸ªé€Ÿåº¦å’ŒæŒç»­æ—¶é—´
-    // å…ˆæ ‡å®šå·¦ä¾§ä½ç½®ï¼Œå†æ ‡å®šå³ä¾§ä½ç½®
+    // µç»ú¿ØÖÆ·½·¨Îª¸ø¶¨µç»úÒ»¸öËÙ¶ÈºÍ³ÖĞøÊ±¼ä
+    // ÏÈ±ê¶¨×ó²àÎ»ÖÃ£¬ÔÙ±ê¶¨ÓÒ²àÎ»ÖÃ
     if (!encoder_ruler_left_limit_flag)
     {
       MC_ProgramSpeedRampMotor1(50, 50);
-      // è®°å½•ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
+      // ¼ÇÂ¼Á½²àÎ»ÖÃµÄ±ê¶¨Öµ
       encoder_ruler_left_limit=pos;
     }
     else if (!encoder_ruler_right_limit_flag)
     {
       MC_ProgramSpeedRampMotor1(-50, 50);
-      // è®°å½•ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
+      // ¼ÇÂ¼Á½²àÎ»ÖÃµÄ±ê¶¨Öµ
       encoder_ruler_right_limit=pos;
     }
     else
     {
-      // ç”µæœºåˆ°è¾¾ä¸¤ä¾§ï¼Œåœæ­¢ç”µæœº
+      // µç»úµ½´ïÁ½²à£¬Í£Ö¹µç»ú
       MC_ProgramSpeedRampMotor1(0, 0);
-      // æ ‡å®šå®Œæˆ
+      // ±ê¶¨Íê³É
       encoder_ruler_limit_calibrated=true;
     }
   }
-  // è¾“å‡ºå·¦å³ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
+  // Êä³ö×óÓÒÁ½²àÎ»ÖÃµÄ±ê¶¨Öµ
   // [DEBUG]
   if (debug)
   {
     printf("Encoder Ruler Left Limit:%f\r\n",encoder_ruler_left_limit);
     printf("Encoder Ruler Right Limit:%f\r\n",encoder_ruler_right_limit);
-    // è¾“å‡ºæ ‡å®šå®Œæˆ
+    // Êä³ö±ê¶¨Íê³É
     printf("Encoder Ruler Limit Calibrated!\r\n");
-    // æ¢è¡Œ
+    // »»ĞĞ
     printf("\r\n");
   }
 }
 
-// è®¡ç®—ä¸­é—´ä½ç½®
+// [TASK-2] ¼ÆËãÖĞ¼äÎ»ÖÃ
 void Calibrate_Encoder_Ruler_Middle()
 {
-  // è®¡ç®—ä¸­é—´ä½ç½®çš„æ ‡å®šå€¼
+  // ¼ÆËãÖĞ¼äÎ»ÖÃµÄ±ê¶¨Öµ
   encoder_ruler_middle=(encoder_ruler_left_limit+encoder_ruler_right_limit)/2;
   if(debug)
   {
     printf("Encoder Ruler Middle:%f\r\n",encoder_ruler_middle);
-    // è¾“å‡ºæ ‡å®šå®Œæˆ
+    // Êä³ö±ê¶¨Íê³É
     printf("Encoder Ruler Middle Calibrated!\r\n");
   }
 }
 
-// æ§åˆ¶ç”µæœºé€Ÿåº¦ï¼Œä¼ å…¥å‚æ•°ä¸ºç”µæœºä½ç½®ï¼Œæ®æ­¤è®¡ç®—ç”µæœºé€Ÿåº¦
+// [TASK-2] ¿ØÖÆµç»úËÙ¶È£¬´«Èë²ÎÊıÎªµç»úÎ»ÖÃ£¬¾İ´Ë¼ÆËãµç»úËÙ¶È
 void Control_Motor_Speed(float position)
 {
   // [DEBUG]
   if (debug)
   {
-    // è¾“å‡ºç”µæœºä½ç½®
+    // Êä³öµç»úÎ»ÖÃ
     printf("Encoder Ruler Position:%f\r\n",position);
-    // è¾“å‡ºä¸­é—´ä½ç½®
+    // Êä³öÖĞ¼äÎ»ÖÃ
     printf("Encoder Ruler Middle:%f\r\n",encoder_ruler_middle);
-    // è¾“å‡ºç”µæœºä½ç½®åˆ°ä¸­é—´ä½ç½®çš„è·ç¦»
+    // Êä³öµç»úÎ»ÖÃµ½ÖĞ¼äÎ»ÖÃµÄ¾àÀë
     printf("Encoder Ruler Distance:%f\r\n",fabs(position-encoder_ruler_middle));
-    // æ¢è¡Œ
+    // »»ĞĞ
     printf("\r\n");
   }
 
-  // ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„ä½™é‡èŒƒå›´å†…ï¼Œç”µæœºé€Ÿåº¦ä¸º0
+  // µç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄÓàÁ¿·¶Î§ÄÚ£¬µç»úËÙ¶ÈÉèÎª0
   if (fabs(position-encoder_ruler_middle)<middle_limit)
   {
     // [DEBUG]
@@ -208,28 +421,330 @@ void Control_Motor_Speed(float position)
     MC_ProgramSpeedRampMotor1(0, 0);
     MC_StopMotor1();
 
-    // æ ‡è®°ç”µæœºåˆ°è¾¾ä¸­é—´ä½ç½®
-    GoHome_action_Flag = false;
-    GoHome_Flag = true;
+    // ±ê¼Çµç»úµ½´ïÖĞ¼äÎ»ÖÃ
+    find_home_flag = false;
   }
-
-  // ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„ä½™é‡èŒƒå›´å¤–
+  // µç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄÓàÁ¿·¶Î§Íâ
   else
   {
     // [DEBUG]
     if (debug)
       printf("MOTIVATE MOTOR \r\n");
-    // è‹¥ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„å·¦ä¾§ï¼Œç”µæœºé€Ÿåº¦ä¸ºè´Ÿ
+    // Èôµç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄ×ó²à£¬µç»úËÙ¶ÈÎª¸º
     if (position<encoder_ruler_middle)
     {
       MC_ProgramSpeedRampMotor1(50, 10);
     }
-    // è‹¥ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„å³ä¾§ï¼Œç”µæœºé€Ÿåº¦ä¸ºæ­£
+    // Èôµç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄÓÒ²à£¬µç»úËÙ¶ÈÎªÕı
     else
     {
       MC_ProgramSpeedRampMotor1(-50, 10);
     }
   }
+}
+
+// [TASK-3] 
+// ³õÊ¼»¯Ò»¸öÆµÂÊËæ×ÅÊ±¼äÖ¸ÊıÔö¼ÓµÄÕıÏÒÉ¨ÆµĞÅºÅµÄ½á¹¹Ìå
+// ÊäÈë£ºunsigned int t_0 É¨Æµº¯ÊıµÄÆğÊ¼Ê±¿Ì£¬ µ¥Î»ms
+// ÊäÈë£ºunsigned int t_01 ´Ót0µ½t1µÄÊ±¼ä¼ä¸ô, µ¥Î»ms
+// ÊäÈë£ºfloat f0 Ê±¿Ìt0¶ÔÓ¦µÄÆµÂÊ£¬ µ¥Î»hz
+// ÊäÈë£ºfloat f1 Ê±¿Ìt1¶ÔÓ¦µÄÆµÂÊ£¬ µ¥Î»hz 
+// ÊäÈë£ºfloat A É¨ÆµĞÅºÅµÄ·ùÖµ
+// Êä³ö£ºint 0 = ³É¹¦·µ»Ø0
+int init_my_sweep(my_sweep_t *sweep, unsigned int t_0, unsigned int t_01, float f0, float f1, float A) 
+{ 
+  if ((t_01 == 0) || (f0 <=0.0f) || (f1 <= 0.0f) || (f0 == f1) || (A == 0) || (!sweep)) 
+  {
+    //·Ç·¨Èë²Î
+    return -1;
+  }
+
+  sweep->t_0 = t_0;
+  sweep->t_01 = t_01;
+  sweep->f0 = f0;
+  sweep->f1 = f1;
+  sweep->A = A;
+
+  /* start add code here */ 
+  /*¼ÆËãÖ¸Êıº¯ÊıµÄµ×Êık£¬×¢ÒâÊ±¼äµÄµ¥Î»Òª×ª»»Îªms*/ 
+  sweep->k = exp(1.0 / (double)(sweep->t_01* 0.001) * log(sweep->f1 / sweep->f0));
+  /*¼ÆËãÏµÊıp, ×¢Òâµ¥Î»×ª»»*/
+  sweep->p = 2 * PI * sweep->f0 / log(sweep->k);
+  /* end add code here */
+
+  return 0; 
+}
+
+// [TASK-3] ¸ù¾İµ±Ç°Ê±¼äÊä³öÆµÂÊËæ×ÅÊ±¼äÖ¸ÊıÔö¼ÓµÄÕıÏÒÉ¨ÆµĞÅºÅ
+float run_my_sweep(my_sweep_t *sweep, unsigned int t_now)
+{
+  float t = 0.0f; //Ïà¶ÔÊ±¼ä t 
+  float y = 0.0f; //É¨ÆµĞÅºÅ 
+  
+  if (!sweep) 
+  { 
+    return 0.0f; /*·Ç·¨Èë²Î*/ 
+  }
+  
+  if (t_now < sweep->t_0) 
+  { 
+    return 0.0f; /*Ê±¼ä»¹Î´µÃµ½*/ 
+  }
+  
+  t = (t_now - sweep->t_0) % sweep->t_01; /*Í¨¹ıÇóÓà²Ù×÷ÊµÏÖ£¬ÖÜÆÚĞÔÉ¨ÆµµÄ¹ı³Ì*/
+  t = t * 0.001f; /*½«µ¥Î»×ª»»Îª s*/
+  
+  /* start add your code here */
+  y = sweep->A * sin(sweep->p * (pow(sweep->k, t) - 1));
+  /* end add your code here */
+
+  return y;
+}
+
+// [TASK-3] ¼ÆËãĞ£ÑéºÍ
+uint8_t get_uint8_sum_check(uint8_t *data, int len) 
+{ 
+  int i = 0; 
+  uint8_t sum = 0; 
+
+  for (i = 0; i < len; i++) 
+  {
+    sum += data[i]; 
+  }
+
+  return sum; 
+}
+
+// [TASK-3] Ïòmatlab·¢ËÍÈı¸ö¸¡µãÊı
+void send_data_2_matlab(float data1, float data2, float data3)
+{ 
+  frame_matlab_t frame = {0};
+
+  // int i = 0; /*Ìî³äÖ¡Í·*/ 
+  frame.start_flag = 0xAA; 
+  frame.frame_len = sizeof(frame); 
+  frame.header_check = get_uint8_sum_check((uint8_t *)&frame, 2); /*Ìî³äÊı¾İ*/
+
+  memcpy((uint8_t *)&frame.data_buf[0], (uint8_t *)&data1, 4); 
+  memcpy((uint8_t *)&frame.data_buf[4], (uint8_t *)&data2, 4); 
+  memcpy((uint8_t *)&frame.data_buf[8], (uint8_t *)&data3, 4); /*¼ÆËãÊı¾İÇóºÍÖµ,ÓÃÓÚ½ÓÊÕ·½Ğ£ÑéÊı¾İµÄÍêºÃĞÔ*/ 
+  
+  frame.frame_check = get_uint8_sum_check((uint8_t *)&frame, frame.frame_len-1); /*Í¨¹ı ´®¿Ú5 ·¢ËÍµ½µçÄÔ */ 
+  
+  HAL_UART_Transmit(&huart5, (uint8_t *)&frame,frame.frame_len,0xffff);   
+}
+
+// [TASK-3] ÊµÏÖÉ¨Æµ±æÊ¶¹¦ÄÜ£¬¸Ã¹¦ÄÜ½«±»·ÅÖÃÔÚmain º¯ÊıµÄwhile(1)ÖĞÔËĞĞ
+// bool is_reinit_sweep: ÊÇ·ñĞèÒªÖØĞÂ³õÊ¼»¯É¨ÆµĞÅºÅ
+void run_sweep_identification(bool is_reinit_sweep)
+{
+  static my_sweep_t sweep = {0};
+  int16_t sweep_input = 0;
+  int16_t sweep_output = 0;
+  uint32_t sys_tick = 0;
+  static uint32_t init_flag = 0; 
+  static uint32_t last_sys_tick = 0; 
+  // ÈôĞèÒªÖØĞÂ³õÊ¼»¯É¨ÆµĞÅºÅ
+  if (is_reinit_sweep == true) 
+  { 
+    init_flag = 0; 
+  }
+
+  // ÆµÂÊÔÚ10sÄÚ£¬´Ó0.5hz±ä»¯µ½10hz£¬·ù¶ÈÎª1500 digit current
+  uint32_t t_period_ms = 10*1000; //10s 
+  float f0 = 0.5; 
+  float f1 = 10; 
+  float Amp = 1500.0f; 
+  
+  float time = 0.0f;
+  sys_tick = HAL_GetTick(); //»ñÈ¡µ±Ç°Ê±¿Ì£¬µ¥Î»ms 
+  time = 0.001f * sys_tick; //µ¥Î»s
+
+  /*½øÈëµÄÌõ¼şÊ±»ØÁã³É¹¦£¬ÇÒ°´ÁËK1ÔËĞĞ, ¾Í¿ªÊ¼Ö´ĞĞÉ¨Æµ±æÊ¶¹ı³Ì£¬
+    ×¢Òâfind_home_flagÊÇ»ØÁã³É¹¦µÄ±êÖ¾Î»£¬ÊÇÒ»¸öÈ«¾Ö±äÁ¿,ÒªÔÚÍâ²¿ÊµÏÖÕâ¸ö±êÖ¾±äÁ¿*/
+  // if ((find_home_flag == 1) && (MC_GetSTMStateMotor1() == RUN)) {
+  if ((sweep_identification_flag == true) && (MC_GetSTMStateMotor1() == RUN)) 
+  {
+    // Èç¹ûµ±Ç°Ê±¿Ì·¢ÉúÁË±ä»¯£¬Õâ¸öÌõ¼şÃ¿ms¶¼»á³ÉÁ¢
+    if (last_sys_tick != sys_tick)  
+    {
+      last_sys_tick = sys_tick;
+      // Í¨¹ı % °ÑÆµÂÊ´Ó1000hz½µµÍµ½100hz£¬¼´Ã¿10ms·¢ÉúÒ»´Î±ä»¯
+      if (sys_tick % 10 == 0) 
+      {
+          // ³õÊ¼»¯É¨ÆµÅäÖÃ
+          if (init_flag == 0) 
+          {
+              init_my_sweep(&sweep, sys_tick, t_period_ms, f0, f1, Amp);
+              printf("sweep-init:k=%.5f,p=%.5f\r\n", (float)sweep.k,
+                     (float)sweep.p);
+              init_flag = 1;
+          }
+
+          // »ñÈ¡ÕıÏÒÉ¨ÆµĞÅºÅ
+          sweep_input = (int16_t)run_my_sweep(&sweep, sys_tick);
+
+          // ½«ÕıÏÒÉ¨ÆµĞÅºÅÊäÈëµ½ ST MC SDKµÄÁ¦¾Ø¿ØÖÆAPIÖĞ
+          MC_ProgramTorqueRampMotor1(sweep_input, 0);  
+          // »ñÈ¡Ë¿¸ËµÄ×ªËÙĞÅÏ¢£¬µ¥Î»Îª0.1hz
+          sweep_output = MC_GetMecSpeedAverageMotor1(); 
+          // °ÑÊ±¼ä£¬input£¬output·¢ËÍµ½matlab
+          send_data_2_matlab(time, (float)sweep_input, (float)sweep_output);
+          // [DEBUG]
+          if(debug)
+            printf("sweep-input:%d,sweep-output:%d\r\n", sweep_input, sweep_output);
+      }
+    }
+  }
+}
+
+// [TASK-3] ¿ØÖÆº¯ÊıÊµÏÖ
+// ======================================================
+// ====   ¸ù¾İµç»úÊµ¼Ê±æÊ¶½á¹û£¬Éè¼Æ¿ØÖÆÆ÷²¢½øĞĞÀëÉ¢»¯   ====
+// ======================================================
+int discrete_control_func(int32_t u0, float e1, float e0)
+{
+  return (int)(-0.6667*u0 + 3000*e1 - 2200*e0);
+}
+
+// [TASK-3] ÊµÏÖ½×Ô¾²âÊÔº¯Êı£¬·ÅÔÚmainµÄwhile(1)ÖĞ½øĞĞ½×Ô¾²âÊÔ
+void function_step_test(void)
+{
+  /*1.¶¨Òå¾Ö²¿±äÁ¿ºÍ¾²Ì¬±äÁ¿*/
+  static int32_t u1 = 0;
+  static int32_t u0 = 0;
+  static float e1 = 0;
+  static float e0 = 0;
+  uint32_t sys_tick = 0;
+  float fdk = 0;
+  float Amp = 20;
+  static float ref = 0;
+
+  /*2.³õÊ¼»¯ÄãµÄ¿ØÖÆÆ÷*/ 
+  float time = 0.0f;
+  sys_tick = HAL_GetTick();
+  time = 0.001f * sys_tick;
+  
+  /*3.Æô¶¯step²âÊÔ¹¦ÄÜÌõ¼şÂú×ã*/
+  // if ((find_home_flag==true)&&(MC_GetSTMStateMotor1()==RUN))
+  if ((step_test_flag==true)&&(MC_GetSTMStateMotor1()==RUN))
+  { 
+    /*4.·ÖÆµÆ÷È·¶¨µ±Ç°tickÎª¿ØÖÆÆ÷ÔËĞĞµÄtick*/
+    if (sys_tick % 10 == 0)
+    { 
+      if(step_first_flag == true)
+      {
+        /*5.»ñÈ¡¹âÕ¤³ßµÄµ±Ç°Î»ÖÃ fdk (mm)*/ 
+        fdk = Get_Encoder_Ruler_Count();
+
+        /*6.Ö¸¶¨½×Ô¾µÄ¾àÀëAmpÍ³Ò»¶¨ÒåÎª20mm*/ 
+        Amp = 20;
+
+        /*7.Ò»´ÎĞÔ¼ÆËãµ±Ç°²Î¿¼Öµ ref = fdk+Amp*/ 
+        ref = Amp + fdk;
+        step_first_flag = false;
+      }
+
+      /*8.½«ref×÷ÎªÄãµÄÎ»ÖÃ¿ØÖÆÆ÷µÄÊäÈëÃüÁî£¬µ÷ÓÃ¿ØÖÆÆ÷*/ 
+      e1 = ref - Get_Encoder_Ruler_Count();
+      // u1 = (int)(-0.6667*u0 + 3000*e1 - 2200*e0);
+      u1 = discrete_control_func(u0, e1, e0);
+      
+      // ÏŞÖÆu1µÄ·¶Î§£¬´¦Àí±¥ºÍÇé¿ö
+      if(u1 > 4997) u1 = 4997;
+      if(u1 < -4997) u1 = -4997;
+      // Í¨¹ıST MC SDKµÄÁ¦¾Ø¿ØÖÆAPI£¬½«u1×÷ÎªÊäÈë£¬¿ØÖÆµç»ú
+      MC_ProgramTorqueRampMotor1(u1, 0);
+      // ¸üĞÂe0ºÍu0
+      e0 = e1;
+      u0 = u1;
+      fdk = Get_Encoder_Ruler_Count();
+
+      /*9.Ê¹ÓÃ send_data_2_matlab, °ÑÊ±¼ä£¬ref, fdk·¢ËÍµ½matlab½øĞĞÏÔÊ¾*/ 
+      send_data_2_matlab(time, (float)ref, (float)fdk);
+    } 
+    else 
+    {
+      /*10. do some thing if need*/ 
+    }
+  }
+  else 
+  {
+    /*11. do some thing if need*/ 
+    // [DEBUG]
+    if(debug)
+    {
+      printf("Can't run step test, please check the condition!\r\n");
+    }
+  }
+}
+
+// [TASK-3] ÊµÏÖÒ»¸öÉ¨Æµ²âÊÔº¯Êı£¬·ÅÔÚmainµÄwhile(1)ÖĞ½øĞĞÉ¨Æµ¸úËæ²âÊÔ£¬ÑéÖ¤wÎ»ÖÃ±Õ»·´ø¿í
+void function_follow_test(void)
+{ 
+  /*1.¶¨Òå¾Ö²¿±äÁ¿ºÍ¾²Ì¬±äÁ¿*/
+  static int32_t u1 = 0;
+  static int32_t u0 = 0;
+  static float e1 = 0;
+  static float e0 = 0;
+  uint32_t sys_tick = 0;
+  float fdk;
+  static float ref = 0;
+  
+  /*2.³õÊ¼»¯ÄãµÄ¿ØÖÆÆ÷*/
+  float time = 0.0f;
+  sys_tick = HAL_GetTick();
+  time = 0.001f * sys_tick;
+  
+  /*3.³õÊ¼»¯ÄãµÄÕıÏÒĞÅºÅ·¢ÉúÆ÷·ùÖµÎª20mm, ÆµÂÊÔÚ10sÄÚ´Ó1hz±ä»¯µ½2hz*/
+  //10s 1hz->2hz
+  static float w = 1*2*3.1415;
+  float Amp = 20;
+
+  /*4.Æô¶¯É¨Æµ¸úËæ²âÊÔ¹¦ÄÜÌõ¼şÂú×ã*/
+  // if ((find_home_flag==1)&&(MC_GetSTMStateMotor1()==RUN)) 
+  if ((follow_test_flag)&&(MC_GetSTMStateMotor1()==RUN)) 
+  { 
+    /*5.·ÖÆµÆ÷È·¶¨µ±Ç°tickÎª¿ØÖÆÆ÷ÔËĞĞµÄtick*/
+    if (sys_tick % 10 == 0) 
+    { 
+      /*6.»ñÈ¡¹âÕ¤³ßµÄµ±Ç°Î»ÖÃ fdk (mm)*/
+      fdk = Get_Encoder_Ruler_Count();
+      
+      /*7.Ã¿¸ötick¶¼»ñÈ¡×îĞÂµÄÉ¨ÆµĞÅºÅÊä³ö£¬×÷Îªµ±Ç°²Î¿¼Öµ ref = sweep(now)*/
+      ref = Amp*sin(w*time);
+      
+      /*8.½«ref×÷ÎªÄãµÄÎ»ÖÃ¿ØÖÆÆ÷µÄÊäÈëÃüÁî£¬µ÷ÓÃ¿ØÖÆÆ÷*/
+      e1 = ref - fdk;
+      // u1 = (int)(-0.6667*u0 + 3000*e1 - 2200*e0);
+      u1 = discrete_control_func(u0, e1, e0);
+
+      // ÏŞÖÆu1µÄ·¶Î§£¬´¦Àí±¥ºÍÇé¿ö
+      if(u1 > 4997) u1 = 4997;
+      if(u1 < -4997) u1 = -4997;
+      // Í¨¹ıST MC SDKµÄÁ¦¾Ø¿ØÖÆAPI£¬½«u1×÷ÎªÊäÈë£¬¿ØÖÆµç»ú
+      MC_ProgramTorqueRampMotor1(u1, 0);
+      // ¸üĞÂe0ºÍu0
+      e0 = e1;
+      u0 = u1;
+      fdk = Get_Encoder_Ruler_Count();
+      /*9.Ê¹ÓÃ send_data_2_matlab, °ÑÊ±¼ä£¬ref, fdk·¢ËÍµ½matlab½øĞĞÏÔÊ¾*/ 
+      send_data_2_matlab(time, (float)ref, (float)fdk);
+    }
+    else
+    { 
+      /*10. do some thing if need*/
+    } 
+  } 
+  else 
+  {
+    /*11. do some thing if need*/ 
+    // [DEBUG]
+    if(debug)
+    {
+      printf("Can't run follow test, please check the condition!\r\n");
+    }
+  } 
 }
 
 /* USER CODE END PFP */
@@ -284,28 +799,50 @@ int main(void)
 	MC_AlignEncoderMotor1();
   HAL_Delay(100);
 
-  // å¯åŠ¨ç”µæœº
+  // Æô¶¯µç»ú
   MC_StartMotor1();
-  // ç”µæœºä½ç½®æ ‡å®š
-  Calibrate_Encoder_Ruler_Limit();
-  // è®¡ç®—ä¸­é—´ä½ç½®
-  Calibrate_Encoder_Ruler_Middle();
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    // °´¼ü¼ì²â
+    keys_detect();
+    // »ñÈ¡µ±Ç°Î»ÖÃ
     pos=Get_Encoder_Ruler_Count();
-    if (GoHome_action_Flag==true)
+    
+    // µç»ú»ØÁã
+    if (find_home_flag==true)
     {
-      // æ§åˆ¶ç”µæœºé€Ÿåº¦
+      // µç»úÎ»ÖÃ±ê¶¨
+      Calibrate_Encoder_Ruler_Limit();
+      // ¼ÆËãÖĞ¼äÎ»ÖÃ
+      Calibrate_Encoder_Ruler_Middle();
+      // ¿ØÖÆµç»úËÙ¶È£¬Ê¹µÃµç»ú»ØÁã
       Control_Motor_Speed(pos);
+    }
+    // ½øĞĞÉ¨Æµ±æÊ¶
+    if(sweep_identification_flag==true)
+    {
+      run_sweep_identification(sweep_reinit_flag);
+      sweep_reinit_flag = false;
+    }
+    // ½øĞĞ½×Ô¾²âÊÔ
+    if(step_test_flag==true)
+    {
+      function_step_test();
+    }
+    // ½øĞĞÉ¨Æµ¸úËæ²âÊÔ
+    if(follow_test_flag==true)
+    {
+      function_follow_test();
     }
 	  // printf("%.3f \r\n",pos);
 
     /* USER CODE END WHILE */
-		
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -320,11 +857,12 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -338,7 +876,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -351,7 +889,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Enables the Clock Security System 
+  /** Enables the Clock Security System
   */
   HAL_RCC_EnableCSS();
 }
@@ -400,7 +938,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
+  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
@@ -418,7 +956,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time 
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
   */
   sConfigInjected.InjectedChannel = ADC_CHANNEL_6;
   sConfigInjected.InjectedRank = 1;
@@ -433,21 +971,21 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time 
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
   */
   sConfigInjected.InjectedChannel = ADC_CHANNEL_8;
   if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time 
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
   */
   sConfigInjected.InjectedChannel = ADC_CHANNEL_9;
   if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
   */
   sConfig.Channel = ADC_CHANNEL_10;
   sConfig.Rank = 1;
@@ -458,7 +996,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
   */
   sConfig.Channel = ADC_CHANNEL_13;
   sConfig.Rank = 2;
@@ -493,7 +1031,7 @@ static void MX_ADC2_Init(void)
   /* USER CODE BEGIN ADC2_Init 1 */
 
   /* USER CODE END ADC2_Init 1 */
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
+  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
   */
   hadc2.Instance = ADC2;
   hadc2.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
@@ -511,7 +1049,7 @@ static void MX_ADC2_Init(void)
   {
     Error_Handler();
   }
-  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time 
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
   */
   sConfigInjected.InjectedChannel = ADC_CHANNEL_6;
   sConfigInjected.InjectedRank = 1;
@@ -526,21 +1064,21 @@ static void MX_ADC2_Init(void)
   {
     Error_Handler();
   }
-  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time 
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
   */
   sConfigInjected.InjectedChannel = ADC_CHANNEL_8;
   if (HAL_ADCEx_InjectedConfigChannel(&hadc2, &sConfigInjected) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time 
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
   */
   sConfigInjected.InjectedChannel = ADC_CHANNEL_9;
   if (HAL_ADCEx_InjectedConfigChannel(&hadc2, &sConfigInjected) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
   */
   sConfig.Channel = ADC_CHANNEL_6;
   sConfig.Rank = 1;
@@ -572,14 +1110,14 @@ static void MX_DAC_Init(void)
   /* USER CODE BEGIN DAC_Init 1 */
 
   /* USER CODE END DAC_Init 1 */
-  /** DAC Initialization 
+  /** DAC Initialization
   */
   hdac.Instance = DAC;
   if (HAL_DAC_Init(&hdac) != HAL_OK)
   {
     Error_Handler();
   }
-  /** DAC channel OUT1 config 
+  /** DAC channel OUT1 config
   */
   sConfig.DAC_Trigger = DAC_TRIGGER_SOFTWARE;
   sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
@@ -587,7 +1125,7 @@ static void MX_DAC_Init(void)
   {
     Error_Handler();
   }
-  /** DAC channel OUT2 config 
+  /** DAC channel OUT2 config
   */
   if (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_2) != HAL_OK)
   {
@@ -852,6 +1390,7 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 2 */
 
   /* USER CODE END USART1_Init 2 */
+
 }
 
 /**
@@ -873,11 +1412,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
-  /*Configure GPIO pins : GoHome_Pin Start_Stop_Pin */
-  GPIO_InitStruct.Pin = GoHome_Pin|Start_Stop_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  /*Configure GPIO pins : Key_4_Pin Key_3_Pin Go_Home_Pin Key_5_Pin */
+  GPIO_InitStruct.Pin = Key_4_Pin|Key_3_Pin|Go_Home_Pin|Key_5_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : Start_Stop_Pin */
+  GPIO_InitStruct.Pin = Start_Stop_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(Start_Stop_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LIM_P_Pin LIM_N_Pin */
   GPIO_InitStruct.Pin = LIM_P_Pin|LIM_N_Pin;
@@ -885,66 +1430,46 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
-
 }
 
 /* USER CODE BEGIN 4 */
 
-// GPIOå¤–éƒ¨ä¸­æ–­å›è°ƒå‡½æ•°
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  // è‹¥æŒ‰é”®ä½PE1ï¼ŒGoHome_Flagç½®1
-  // PE1å·²è®¾ç½®æ ‡ç­¾ä½GoHome
-  if(GPIO_Pin == GoHome_Pin)
-  {
-    if(GoHome_action_Flag==false)
-    {
-      GoHome_action_Flag = true;
-      MC_StartMotor1();
-    } 
-  }
-}
+// // GPIOÍâ²¿ÖĞ¶Ï»Øµ÷º¯Êı
+// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+// {
+// }
 
+// ³õÊ¼ÉÏµçÊ±µç»úÎ»ÖÃÎª0£¬Á½²à¾àÀëÓÃ²»Í¬·ûºÅ±íÊ¾
+// ¾­¹ı²âÊÔ£¬µç»úÔÚÕû¸öµ¼¹ìÉÏµÄÔË¶¯·¶Î§²»»á³¬¹ıÏŞÖÆ
 float Get_Encoder_Ruler_Count(void)
 {
+  // Ê¹ÓÃint32_tÀàĞÍ£¬ÓÉÓÚÊµ¼Ê¼ÆÊıÖµÎª16Î»£¬ValueÊ¼ÖÕÎªÕıÊı
 	int32_t Value = __HAL_TIM_GET_COUNTER(&htim3);
   
   float CaptureNumber=0;
 	float ruler_pos=0.0f;
 
-	// CaptureNumber= Value+ encoder_ruler_overflow_count * Period;
-  // å­˜åœ¨æº¢å‡ºé—®é¢˜ï¼Œéœ€è¦åŠ ä¸Šæº¢å‡ºæ¬¡æ•°*è®¡æ•°ä¸Šé™
-	// CaptureNumber = Value + encoder_ruler_overflow_count * 65536;
-
-  // valueç”±äºuint32_ç±»å‹ï¼Œæœ€å¤§å€¼ä¸º4294967295
+  // 16Î»ÊıµÄ·¶Î§Î»0~65535£¬µ±ÊıÖµ´óÓÚ32768Ê±£¬ËµÃ÷¼ÆÊıÖµÒç³ö£¬ĞèÒª¼õÈ¥65536
   CaptureNumber = (Value > 32768) ? (Value - 65536) : (Value);
+  // ½«¾àÀë½øĞĞ×ª»»£¬µ¥Î»Îªmm
 	ruler_pos = (float)(CaptureNumber*0.005f);
-	
-  // printf("ruler_pos:%f\r\n",ruler_pos);
+
+  // [DEBUG]
+  if(debug)
+  {
+    printf("Value:%d\r\n",Value);
+    printf("ruler_pos:%f\r\n",ruler_pos);
+  }
 
 	return ruler_pos;
+  // Êµ¼ÊÊ¹ÓÃint16_tÀàĞÍÊ±£¬¿ÉÒÔÕıÈ·ÏÔÊ¾¸ºÊı
+  // ²»ĞèÒª½øĞĞ¶îÍâ´¦Àí£¬µ«ÊÇ²»Ïë¸ÄÁË£¬¾ÍĞ´ÔÚ×¢ÊÍÀïÃæ°É
+  // int16_t test_value = __HAL_TIM_GET_COUNTER(&htim3);
+  // printf("test_value:%d\r\n",test_value);
+  // ruler_pos = (float)(test_value*0.005f);
+  // return ruler_pos;
 }
 
-// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-// {
-//   if(htim->Instance == TIM3)
-//   {
-//     printf("TIM3 PeriodElapsedCallback\r\n");
-//     printf("encoder_ruler_overflow_count:%d\r\n",encoder_ruler_overflow_count);
-
-//     if(__HAL_TIM_IS_TIM_COUNTING_DOWN(&htim3))
-//     {
-//       encoder_ruler_overflow_count++;
-//     }
-//     else
-//     {
-//       encoder_ruler_overflow_count--;
-//     }
-//   }
-// }
 /* USER CODE END 4 */
 
 /**
@@ -968,7 +1493,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
