@@ -3,54 +3,54 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : Main program body\ 
-  * @author         : »Æ¼Ì·² huangjifan
+  * @author         : é»„ç»§å‡¡ huangjifan
   * @date           : 2023-05-21
   * @description:   
-  * ×Ô¶¯¿ØÖÆÊµ¼ù×ÛºÏÊµÑé´úÂë×ÛºÏ
+  * è‡ªåŠ¨æ§åˆ¶å®è·µç»¼åˆå®éªŒä»£ç ç»¼åˆ
   * Integrated Code for Automatic Control Practical Comprehensive Experiment
   * @version        : 1.0.0
   ******************************************************************************
   * @detailed_description:
-  * ±¾´úÂëÎª×Ô¶¯¿ØÖÆÊµ¼ù×ÛºÏÊµÑé´úÂë×ÛºÏ£¬°üº¬ÁË»ØÁã¡¢É¨Æµ¡¢½×Ô¾¡¢¸úËæµÈ¹¦ÄÜ
+  * æœ¬ä»£ç ä¸ºè‡ªåŠ¨æ§åˆ¶å®è·µç»¼åˆå®éªŒä»£ç ç»¼åˆï¼ŒåŒ…å«äº†å›é›¶ã€æ‰«é¢‘ã€é˜¶è·ƒã€è·Ÿéšç­‰åŠŸèƒ½
   * 
-  * »·¾³ËµÃ÷£º
-  * 1. ±¾´úÂëÊ¹ÓÃMotorControlWorkbenchÈí¼şÉú³Éµç»úÇı¶¯´úÂë£¬°æ±¾Îª5.2.0
-  * 2. ±¾´úÂëÔÚSTM32CubeMX 6.1.0°æ±¾ÏÂÉú³É£¬Ê¹ÓÃÁËHAL¿â£¬°æ±¾Îª1.7.10
-  * 3. ±¾´úÂëÊ¹ÓÃÁËmotorcontrol¿â£¬°æ±¾ÓÉMotorControlWorkbenchÈ·¶¨
-  * 4. ±¾´úÂëÔÚKeil MDK 5.37.0°æ±¾ÏÂ±àÒëÍ¨¹ı
+  * ç¯å¢ƒè¯´æ˜ï¼š
+  * 1. æœ¬ä»£ç ä½¿ç”¨MotorControlWorkbenchè½¯ä»¶ç”Ÿæˆç”µæœºé©±åŠ¨ä»£ç ï¼Œç‰ˆæœ¬ä¸º5.2.0
+  * 2. æœ¬ä»£ç åœ¨STM32CubeMX 6.1.0ç‰ˆæœ¬ä¸‹ç”Ÿæˆï¼Œä½¿ç”¨äº†HALåº“ï¼Œç‰ˆæœ¬ä¸º1.7.10
+  * 3. æœ¬ä»£ç ä½¿ç”¨äº†motorcontrolåº“ï¼Œç‰ˆæœ¬ç”±MotorControlWorkbenchç¡®å®š
+  * 4. æœ¬ä»£ç åœ¨Keil MDK 5.37.0ç‰ˆæœ¬ä¸‹ç¼–è¯‘é€šè¿‡
   * 
-  * ¹¦ÄÜËµÃ÷£º
-  * ¸÷¸öÖ÷Òª¹¦ÄÜ¶¨ÒåÁËÏà¹ØµÄ±äÁ¿£¬ÆäÖĞ²¼¶û±äÁ¿ÓÃÓÚ¿ØÖÆ³ÌĞòµÄÖ´ĞĞÁ÷³ÌºÍ¹¦ÄÜµÄ¿ªÆô
-  * ¸÷¸ö±äÁ¿µÄÖ÷Òª¹¦ÄÜÈçÏÂ£º
-  * 1. »ØÁã£ºfind_home_flag             ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞ»ØÁã²Ù×÷
-  * 2. É¨Æµ£ºsweep_identification_flag  ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞÉ¨Æµ±æÊ¶²Ù×÷
-  * 3. ½×Ô¾£ºstep_test_flag             ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞ½×Ô¾²Ù×÷
-  * 4. ¸úËæ£ºfollow_test_flag           ÓÃÓÚ¿ØÖÆÊÇ·ñÖ´ĞĞÉ¨Æµ¸úËæ²Ù×÷
-  * ¹¦ÄÜµÄ¾ßÌå×÷ÓÃÇë½áºÏÊµÑéÖ¸µ¼Êé½øĞĞÀí½â
+  * åŠŸèƒ½è¯´æ˜ï¼š
+  * å„ä¸ªä¸»è¦åŠŸèƒ½å®šä¹‰äº†ç›¸å…³çš„å˜é‡ï¼Œå…¶ä¸­å¸ƒå°”å˜é‡ç”¨äºæ§åˆ¶ç¨‹åºçš„æ‰§è¡Œæµç¨‹å’ŒåŠŸèƒ½çš„å¼€å¯
+  * å„ä¸ªå˜é‡çš„ä¸»è¦åŠŸèƒ½å¦‚ä¸‹ï¼š
+  * 1. å›é›¶ï¼šfind_home_flag             ç”¨äºæ§åˆ¶æ˜¯å¦æ‰§è¡Œå›é›¶æ“ä½œ
+  * 2. æ‰«é¢‘ï¼šsweep_identification_flag  ç”¨äºæ§åˆ¶æ˜¯å¦æ‰§è¡Œæ‰«é¢‘è¾¨è¯†æ“ä½œ
+  * 3. é˜¶è·ƒï¼šstep_test_flag             ç”¨äºæ§åˆ¶æ˜¯å¦æ‰§è¡Œé˜¶è·ƒæ“ä½œ
+  * 4. è·Ÿéšï¼šfollow_test_flag           ç”¨äºæ§åˆ¶æ˜¯å¦æ‰§è¡Œæ‰«é¢‘è·Ÿéšæ“ä½œ
+  * åŠŸèƒ½çš„å…·ä½“ä½œç”¨è¯·ç»“åˆå®éªŒæŒ‡å¯¼ä¹¦è¿›è¡Œç†è§£
   * 
-  * °´¼üËµÃ÷£º
-  * °´¼üÉèÖÃÎªinputÄ£Ê½£¬ÆäÖĞKEY1Îªworkbench¿âÄ¬ÈÏÆôÍ£°´¼ü£¬ÈÔÎªÍâ²¿ÖĞ¶ÏÄ£Ê½
-  * KEY2°´¼ü°´ÏÂºó£¬µç»ú»ØÁã²»¿ÉÖĞ¶Ï£¬»ØÁãÍê³Éºó×Ô¶¯Í£Ö¹»ØÁã¹¦ÄÜ
-  * KEY3~5°´¼ü°´ÏÂºóÆô¶¯¶ÔÓ¦µÄ¹¦ÄÜ£¬ÔÙ´Î°´ÏÂÔòÍ£Ö¹¶ÔÓ¦µÄ¹¦ÄÜ
-  * 1. °´¼üKEY1£ºÒı½Å-PE0£¬¹¦ÄÜ-µç»úÆôÍ£
-  * 2. °´¼üKEY2£ºÒı½Å-PE1£¬¹¦ÄÜ-µç»ú»ØÁã
-  * 3. °´¼üKEY3£ºÒı½Å-PE2£¬¹¦ÄÜ-É¨Æµ±æÊ¶
-  * 4. °´¼üKEY4£ºÒı½Å-PE3£¬¹¦ÄÜ-½×Ô¾²âÊÔ
-  * 5. °´¼üKEY5£ºÒı½Å-PE4£¬¹¦ÄÜ-É¨Æµ¸úËæ
-  * ¿ÉÒÔ½áºÏRESET°´¼ü¸´Î»µ¥Æ¬»ú
+  * æŒ‰é”®è¯´æ˜ï¼š
+  * æŒ‰é”®è®¾ç½®ä¸ºinputæ¨¡å¼ï¼Œå…¶ä¸­KEY1ä¸ºworkbenchåº“é»˜è®¤å¯åœæŒ‰é”®ï¼Œä»ä¸ºå¤–éƒ¨ä¸­æ–­æ¨¡å¼
+  * KEY2æŒ‰é”®æŒ‰ä¸‹åï¼Œç”µæœºå›é›¶ä¸å¯ä¸­æ–­ï¼Œå›é›¶å®Œæˆåè‡ªåŠ¨åœæ­¢å›é›¶åŠŸèƒ½
+  * KEY3~5æŒ‰é”®æŒ‰ä¸‹åå¯åŠ¨å¯¹åº”çš„åŠŸèƒ½ï¼Œå†æ¬¡æŒ‰ä¸‹åˆ™åœæ­¢å¯¹åº”çš„åŠŸèƒ½
+  * 1. æŒ‰é”®KEY1ï¼šå¼•è„š-PE0ï¼ŒåŠŸèƒ½-ç”µæœºå¯åœ
+  * 2. æŒ‰é”®KEY2ï¼šå¼•è„š-PE1ï¼ŒåŠŸèƒ½-ç”µæœºå›é›¶
+  * 3. æŒ‰é”®KEY3ï¼šå¼•è„š-PE2ï¼ŒåŠŸèƒ½-æ‰«é¢‘è¾¨è¯†
+  * 4. æŒ‰é”®KEY4ï¼šå¼•è„š-PE3ï¼ŒåŠŸèƒ½-é˜¶è·ƒæµ‹è¯•
+  * 5. æŒ‰é”®KEY5ï¼šå¼•è„š-PE4ï¼ŒåŠŸèƒ½-æ‰«é¢‘è·Ÿéš
+  * å¯ä»¥ç»“åˆRESETæŒ‰é”®å¤ä½å•ç‰‡æœº
   * 
-  * ±àÂëÆ÷ËµÃ÷£º    ±¾³ÌĞòÊ¹ÓÃTIM3×÷Îª±àÂëÆ÷µÄ¼ÆÊıÆ÷£¬¼ÆÊıÆ÷µÄ¼ÆÊı·¶Î§Îª0~65535
-  *                ¶ÔÓÚ¼ÆÊıÆ÷Òç³öµÄÇé¿ö£¬³ÌĞòÖĞÒÑ¾­×öÁË´¦Àí£¬²»ĞèÒª¶îÍâ´¦Àí
-  *                ¿ÉÒÔ²é¿´Get_Encoder_Ruler_Count(void)º¯ÊıµÄÊµÏÖ£¬ÆäÖĞÓĞÁ½ÖÖ´¦Àí·½Ê½£¬¿ÉÒÔ×ÔĞĞÑ¡Ôñ
+  * ç¼–ç å™¨è¯´æ˜ï¼š    æœ¬ç¨‹åºä½¿ç”¨TIM3ä½œä¸ºç¼–ç å™¨çš„è®¡æ•°å™¨ï¼Œè®¡æ•°å™¨çš„è®¡æ•°èŒƒå›´ä¸º0~65535
+  *                å¯¹äºè®¡æ•°å™¨æº¢å‡ºçš„æƒ…å†µï¼Œç¨‹åºä¸­å·²ç»åšäº†å¤„ç†ï¼Œä¸éœ€è¦é¢å¤–å¤„ç†
+  *                å¯ä»¥æŸ¥çœ‹Get_Encoder_Ruler_Count(void)å‡½æ•°çš„å®ç°ï¼Œå…¶ä¸­æœ‰ä¸¤ç§å¤„ç†æ–¹å¼ï¼Œå¯ä»¥è‡ªè¡Œé€‰æ‹©
   * 
-  * ´®¿ÚËµÃ÷£º      ±¾³ÌĞòÊ¹ÓÃuart5×÷ÎªÓëÉÏÎ»»úÍ¨ĞÅµÄ´®¿Ú£¬²¨ÌØÂÊÎª115200
+  * ä¸²å£è¯´æ˜ï¼š      æœ¬ç¨‹åºä½¿ç”¨uart5ä½œä¸ºä¸ä¸Šä½æœºé€šä¿¡çš„ä¸²å£ï¼Œæ³¢ç‰¹ç‡ä¸º115200
   * 
-  * debugÄ£Ê½ËµÃ÷£º Ê¹ÓÃ²¼¶û±äÁ¿ debug ¿ØÖÆÊÇ·ñ¿ªÆôdebugÄ£Ê½
-  *                debugÄ£Ê½ÏÂ»áÊä³öÒ»Ğ©µ÷ÊÔĞÅÏ¢£¬×¢ÒâÓëmatlabµÄÍ¨ĞÅ»á´æÔÚ¸ÉÈÅ
+  * debugæ¨¡å¼è¯´æ˜ï¼š ä½¿ç”¨å¸ƒå°”å˜é‡ debug æ§åˆ¶æ˜¯å¦å¼€å¯debugæ¨¡å¼
+  *                debugæ¨¡å¼ä¸‹ä¼šè¾“å‡ºä¸€äº›è°ƒè¯•ä¿¡æ¯ï¼Œæ³¨æ„ä¸matlabçš„é€šä¿¡ä¼šå­˜åœ¨å¹²æ‰°
   * 
-  * ¿ØÖÆÆ÷ËµÃ÷£º    ½×Ô¾²âÊÔ¡¢É¨Æµ¸ú×Ù¹¦ÄÜĞèÒªÊ¹ÓÃ¿ØÖÆÆ÷
-  *                ±¾³ÌĞòÊ¹ÓÃÁËÀëÉ¢»¯ºóµÄ¿ØÖÆÆ÷£¬¾ßÌåÊµÏÖÔÚdiscrete_control_func()º¯ÊıÖĞ
-  *                ¿ÉÒÔ¸ù¾İÊ¹ÓÃµÄµç»úÏµÍ³±æÊ¶½á¹û£¬Éè¼Æ¿ØÖÆÆ÷²¢ĞŞ¸Ä¸Ãº¯ÊıµÄÊµÏÖ
+  * æ§åˆ¶å™¨è¯´æ˜ï¼š    é˜¶è·ƒæµ‹è¯•ã€æ‰«é¢‘è·Ÿè¸ªåŠŸèƒ½éœ€è¦ä½¿ç”¨æ§åˆ¶å™¨
+  *                æœ¬ç¨‹åºä½¿ç”¨äº†ç¦»æ•£åŒ–åçš„æ§åˆ¶å™¨ï¼Œå…·ä½“å®ç°åœ¨discrete_control_func()å‡½æ•°ä¸­
+  *                å¯ä»¥æ ¹æ®ä½¿ç”¨çš„ç”µæœºç³»ç»Ÿè¾¨è¯†ç»“æœï¼Œè®¾è®¡æ§åˆ¶å™¨å¹¶ä¿®æ”¹è¯¥å‡½æ•°çš„å®ç°
   ******************************************************************************
   * @detailed_description:
   * This code is the integrated code for the comprehensive experiment of automatic control practice, 
@@ -136,12 +136,12 @@ typedef struct
 
 typedef struct 
 { 
-  uint8_t start_flag; /*Ö¡µÄÆğÊ¼±êÖ¾*/
-  uint8_t frame_len; /*Ö¡µÄ³¤¶ÈĞÅÏ¢*/ 
-  uint8_t header_check; /*Ö¡Í·µÄÇóºÍĞ£Ñé*/ 
-  uint8_t data_buf[12]; /*Êı¾İ³¤¶È£¬ÕâÀïÑ¡Ôñ¹Ì¶¨µÄÊı¾İ³¤¶È*/ 
-  uint8_t frame_check; /*Ö¡Í·+Êı¾İµÄÇóºÍĞ£Ñé,ÓÃÓÚ½ÓÊÕ·½Ğ£ÑéÊı¾İµÄÍêºÃĞÔ*/ 
-}frame_matlab_t; /*Êı¾İÖ¡½á¹¹Ìå*/
+  uint8_t start_flag; /*å¸§çš„èµ·å§‹æ ‡å¿—*/
+  uint8_t frame_len; /*å¸§çš„é•¿åº¦ä¿¡æ¯*/ 
+  uint8_t header_check; /*å¸§å¤´çš„æ±‚å’Œæ ¡éªŒ*/ 
+  uint8_t data_buf[12]; /*æ•°æ®é•¿åº¦ï¼Œè¿™é‡Œé€‰æ‹©å›ºå®šçš„æ•°æ®é•¿åº¦*/ 
+  uint8_t frame_check; /*å¸§å¤´+æ•°æ®çš„æ±‚å’Œæ ¡éªŒ,ç”¨äºæ¥æ”¶æ–¹æ ¡éªŒæ•°æ®çš„å®Œå¥½æ€§*/ 
+}frame_matlab_t; /*æ•°æ®å¸§ç»“æ„ä½“*/
 
 /* USER CODE END PTD */
 
@@ -170,49 +170,49 @@ UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-// ±àÂëÆ÷Ïà¹Ø±äÁ¿
-// ¼ÇÂ¼µç»úµ±Ç°Î»ÖÃ
+// ç¼–ç å™¨ç›¸å…³å˜é‡
+// è®°å½•ç”µæœºå½“å‰ä½ç½®
 int32_t ENCODER_RULER_TIM_PERIOD=0;
 float pos=0;
 
-// ²¼¶ûÖµ£¬ÅĞ¶Ïµç»úÊÇ·ñµ½´ï×óÓÒÁ½²à
+// å¸ƒå°”å€¼ï¼Œåˆ¤æ–­ç”µæœºæ˜¯å¦åˆ°è¾¾å·¦å³ä¸¤ä¾§
 bool encoder_ruler_left_limit_flag=false;
 bool encoder_ruler_right_limit_flag=false;
-// Á½²àÎ»ÖÃµÄ±ê¶¨Öµ
+// ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
 float encoder_ruler_left_limit=0;
 float encoder_ruler_right_limit=0;
-// ÖĞ¼äÎ»ÖÃµÄ±ê¶¨Öµ
+// ä¸­é—´ä½ç½®çš„æ ‡å®šå€¼
 float encoder_ruler_middle=0;
-// ²¼¶ûÖµ£¬ÅĞ¶ÏÊÇ·ñÒÑ¾­Íê³ÉÁËÁ½²àÎ»ÖÃµÄ±ê¶¨
+// å¸ƒå°”å€¼ï¼Œåˆ¤æ–­æ˜¯å¦å·²ç»å®Œæˆäº†ä¸¤ä¾§ä½ç½®çš„æ ‡å®š
 bool encoder_ruler_limit_calibrated=false;
-// ³£Á¿Öµ£¬µç»úµ½´ïÖĞ¼äÎ»ÖÃµÄÓàÁ¿
+// å¸¸é‡å€¼ï¼Œç”µæœºåˆ°è¾¾ä¸­é—´ä½ç½®çš„ä½™é‡
 const float middle_limit=2;
 
-// debugÄ£Ê½
-bool debug = false;   // ¹Ø±ÕdebugÄ£Ê½
-// bool debug = true; // ´ò¿ªdebugÄ£Ê½
+// debugæ¨¡å¼
+bool debug = false;   // å…³é—­debugæ¨¡å¼
+// bool debug = true; // æ‰“å¼€debugæ¨¡å¼
 
-// ========¹¦ÄÜ¿ª¹Ø£º»ØÁã========
-// Ö´ĞĞ»ØÁã²Ù×÷
+// ========åŠŸèƒ½å¼€å…³ï¼šå›é›¶========
+// æ‰§è¡Œå›é›¶æ“ä½œ
 bool find_home_flag = false;
-// Ã¿´Î»ØÁã²Ù×÷ÊÇ·ñÊ×ÏÈ½øĞĞ±ê¶¨
+// æ¯æ¬¡å›é›¶æ“ä½œæ˜¯å¦é¦–å…ˆè¿›è¡Œæ ‡å®š
 bool re_calibrate_flag = true;
 // bool re_calibrate_flag = false;
 
-// ========¹¦ÄÜ¿ª¹Ø£ºÉ¨Æµ========
-// É¨Æµ²âÊÔ¿ØÖÆ
+// ========åŠŸèƒ½å¼€å…³ï¼šæ‰«é¢‘========
+// æ‰«é¢‘æµ‹è¯•æ§åˆ¶
 bool sweep_identification_flag = false;
-// É¨ÆµÊÇ·ñĞèÒªÖØĞÂ³õÊ¼»¯
+// æ‰«é¢‘æ˜¯å¦éœ€è¦é‡æ–°åˆå§‹åŒ–
 bool sweep_reinit_flag = false;
 
-// ========¹¦ÄÜ¿ª¹Ø£º½×Ô¾========
-// ½×Ô¾²âÊÔ¿ØÖÆ
+// ========åŠŸèƒ½å¼€å…³ï¼šé˜¶è·ƒ========
+// é˜¶è·ƒæµ‹è¯•æ§åˆ¶
 bool step_test_flag = false;
-// ±íÃ÷³ÌĞò°´ÏÂ¶ÔÓ¦°´¼üºóÊ×´ÎÖ´ĞĞ½×Ô¾º¯Êı
+// è¡¨æ˜ç¨‹åºæŒ‰ä¸‹å¯¹åº”æŒ‰é”®åé¦–æ¬¡æ‰§è¡Œé˜¶è·ƒå‡½æ•°
 bool step_first_flag = true;
 
-// ========¹¦ÄÜ¿ª¹Ø£º¸úËæ========
-// É¨Æµ¸úËæ²âÊÔ
+// ========åŠŸèƒ½å¼€å…³ï¼šè·Ÿéš========
+// æ‰«é¢‘è·Ÿéšæµ‹è¯•
 bool follow_test_flag = false;
 
 /* USER CODE END PV */
@@ -232,35 +232,35 @@ static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 float Get_Encoder_Ruler_Count(void);
 
-// [GENERAL] µ¥¸ö°´¼ü´¦Àíº¯Êı£¬½øĞĞÏû¶¶´¦Àí
-// ´«ÈëÒª½øĞĞ¼ì²âµÄ°´¼üµÄGPIO_Pin£¬·µ»Ø°´¼üÊÇ·ñ°´ÏÂ
+// [GENERAL] å•ä¸ªæŒ‰é”®å¤„ç†å‡½æ•°ï¼Œè¿›è¡Œæ¶ˆæŠ–å¤„ç†
+// ä¼ å…¥è¦è¿›è¡Œæ£€æµ‹çš„æŒ‰é”®çš„GPIO_Pinï¼Œè¿”å›æŒ‰é”®æ˜¯å¦æŒ‰ä¸‹
 bool single_key_detect(uint16_t GPIO_Pin)
 {
-  // °´¼ü°´ÏÂ
+  // æŒ‰é”®æŒ‰ä¸‹
   if(HAL_GPIO_ReadPin(GPIOE, GPIO_Pin) == GPIO_PIN_RESET)
   {
-    // °´¼ü°´ÏÂ£¬µÈ´ı°´¼üÊÍ·Å
+    // æŒ‰é”®æŒ‰ä¸‹ï¼Œç­‰å¾…æŒ‰é”®é‡Šæ”¾
     while(HAL_GPIO_ReadPin(GPIOE, GPIO_Pin) == GPIO_PIN_RESET);
-    // °´¼üÊÍ·Å£¬·µ»Øtrue
+    // æŒ‰é”®é‡Šæ”¾ï¼Œè¿”å›true
     return true;
   }
-  // °´¼üÎ´°´ÏÂ£¬·µ»Øfalse
+  // æŒ‰é”®æœªæŒ‰ä¸‹ï¼Œè¿”å›false
   else
   {
     return false;
   }
 }
 
-// [GENERAL] °´¼ü´¦Àíº¯Êı
+// [GENERAL] æŒ‰é”®å¤„ç†å‡½æ•°
 void keys_detect()
 {
-  // PE1ÒÑÉèÖÃ±êÇ©Î»GoHome
-  // Èô°´¼üÎªPE1£¬find_home_flagÖÃÎªtrue
+  // PE1å·²è®¾ç½®æ ‡ç­¾ä¸ºGoHome
+  // è‹¥æŒ‰é”®ä¸ºPE1ï¼Œfind_home_flagç½®ä¸ºtrue
   if(single_key_detect(Go_Home_Pin))
   {
     MC_StartMotor1();
     find_home_flag = true;
-    // ÖØĞÂ±ê¶¨±àÂëÆ÷
+    // é‡æ–°æ ‡å®šç¼–ç å™¨
     if(re_calibrate_flag)
     {
       encoder_ruler_left_limit_flag=false;
@@ -268,15 +268,15 @@ void keys_detect()
       encoder_ruler_limit_calibrated=false;
     }
   }
-  // Èô°´¼üÎªPE2£¬sweep_test_flag½øĞĞ·­×ª
-  // ÔÊĞí½øĞĞÉ¨Æµ±æÊ¶²âÊÔ
+  // è‹¥æŒ‰é”®ä¸ºPE2ï¼Œsweep_test_flagè¿›è¡Œç¿»è½¬
+  // å…è®¸è¿›è¡Œæ‰«é¢‘è¾¨è¯†æµ‹è¯•
   if(single_key_detect(Key_3_Pin))
   {
     MC_ProgramSpeedRampMotor1(0, 0);
     sweep_identification_flag = !sweep_identification_flag;
-    // ÖØĞÂ½øĞĞÉ¨Æµ³õÊ¼»¯
+    // é‡æ–°è¿›è¡Œæ‰«é¢‘åˆå§‹åŒ–
     sweep_reinit_flag = true;
-    // Í£Ö¹É¨ÆµÊ±£¬½«µç»úÍ£Ö¹
+    // åœæ­¢æ‰«é¢‘æ—¶ï¼Œå°†ç”µæœºåœæ­¢
     if(sweep_identification_flag==false)
     {
       MC_StopMotor1();
@@ -287,13 +287,13 @@ void keys_detect()
     }
   }
 
-  // Èô°´¼üÎªPE3£¬step_test_flag½øĞĞ·­×ª
-  // ÔÊĞí½øĞĞ½×Ô¾²âÊÔ
+  // è‹¥æŒ‰é”®ä¸ºPE3ï¼Œstep_test_flagè¿›è¡Œç¿»è½¬
+  // å…è®¸è¿›è¡Œé˜¶è·ƒæµ‹è¯•
   if(single_key_detect(Key_4_Pin))
   {
     MC_StartMotor1();
     step_test_flag = !step_test_flag;
-    // µ±Ç°Ò»ÂÖ½×Ô¾²âÊÔ£¬º¯ÊıÊ×´ÎÖ´ĞĞ
+    // å½“å‰ä¸€è½®é˜¶è·ƒæµ‹è¯•ï¼Œå‡½æ•°é¦–æ¬¡æ‰§è¡Œ
     step_first_flag = true;
     if(step_test_flag==false)
     {
@@ -301,8 +301,8 @@ void keys_detect()
     }
   }
 
-  // Èô°´¼üÎªPE4£¬follow_test_flag½øĞĞ·­×ª
-  // ÔÊĞí½øĞĞÉ¨Æµ¸úËæ²âÊÔ
+  // è‹¥æŒ‰é”®ä¸ºPE4ï¼Œfollow_test_flagè¿›è¡Œç¿»è½¬
+  // å…è®¸è¿›è¡Œæ‰«é¢‘è·Ÿéšæµ‹è¯•
   if(single_key_detect(Key_5_Pin))
   {
     MC_ProgramSpeedRampMotor1(0, 0);
@@ -316,11 +316,11 @@ void keys_detect()
 }
 
 // [TASK-2]
-// Á½²àÏŞÎ»Æ÷ĞÅºÅ£¬ÅĞ¶Ïµç»úÊÇ·ñµ½´ïÁ½²à
-// ÆäÖĞPG1Òı½ÅÎªÕıÏŞÎ»£¬PG0Òı½ÅÎª¸ºÏŞÎ»
+// ä¸¤ä¾§é™ä½å™¨ä¿¡å·ï¼Œåˆ¤æ–­ç”µæœºæ˜¯å¦åˆ°è¾¾ä¸¤ä¾§
+// å…¶ä¸­PG1å¼•è„šä¸ºæ­£é™ä½ï¼ŒPG0å¼•è„šä¸ºè´Ÿé™ä½
 void Judge_Limit_signal()
 {
-  // µç»úµ½´ï×ó²à
+  // ç”µæœºåˆ°è¾¾å·¦ä¾§
   if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_1)==GPIO_PIN_RESET)
   {
     encoder_ruler_left_limit_flag=true;
@@ -328,7 +328,7 @@ void Judge_Limit_signal()
     if (debug)
       printf("Left Limit!\r\n");
   }
-  // µç»úµ½´ïÓÒ²à
+  // ç”µæœºåˆ°è¾¾å³ä¾§
   else if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_0)==GPIO_PIN_RESET)
   {
     encoder_ruler_right_limit_flag=true;
@@ -338,81 +338,81 @@ void Judge_Limit_signal()
   }
 }
 
-// [TASK-2] Ñ°ÕÒ×óÓÒÁ½²àµÄÎ»ÖÃ£¬½øĞĞÎ»ÖÃ±ê¶¨
+// [TASK-2] å¯»æ‰¾å·¦å³ä¸¤ä¾§çš„ä½ç½®ï¼Œè¿›è¡Œä½ç½®æ ‡å®š
 void Calibrate_Encoder_Ruler_Limit()
 {
-  // µ±Ã»ÓĞÍê³Éµç»úÎ»ÖÃ±ê¶¨Ê±£¬¿ØÖÆµç»ú×ª¶¯
+  // å½“æ²¡æœ‰å®Œæˆç”µæœºä½ç½®æ ‡å®šæ—¶ï¼Œæ§åˆ¶ç”µæœºè½¬åŠ¨
   while(!encoder_ruler_limit_calibrated)
   {
-    // »ñÈ¡µ±Ç°Î»ÖÃ
+    // è·å–å½“å‰ä½ç½®
     pos=Get_Encoder_Ruler_Count();
-    // Á½²àÏŞÎ»Æ÷ĞÅºÅ£¬ÅĞ¶Ïµç»úÊÇ·ñµ½´ïÁ½²à£¬¸üĞÂ±êÖ¾Î»
+    // ä¸¤ä¾§é™ä½å™¨ä¿¡å·ï¼Œåˆ¤æ–­ç”µæœºæ˜¯å¦åˆ°è¾¾ä¸¤ä¾§ï¼Œæ›´æ–°æ ‡å¿—ä½
     Judge_Limit_signal();
-    // µç»ú¿ØÖÆ·½·¨Îª¸ø¶¨µç»úÒ»¸öËÙ¶ÈºÍ³ÖĞøÊ±¼ä
-    // ÏÈ±ê¶¨×ó²àÎ»ÖÃ£¬ÔÙ±ê¶¨ÓÒ²àÎ»ÖÃ
+    // ç”µæœºæ§åˆ¶æ–¹æ³•ä¸ºç»™å®šç”µæœºä¸€ä¸ªé€Ÿåº¦å’ŒæŒç»­æ—¶é—´
+    // å…ˆæ ‡å®šå·¦ä¾§ä½ç½®ï¼Œå†æ ‡å®šå³ä¾§ä½ç½®
     if (!encoder_ruler_left_limit_flag)
     {
       MC_ProgramSpeedRampMotor1(50, 50);
-      // ¼ÇÂ¼Á½²àÎ»ÖÃµÄ±ê¶¨Öµ
+      // è®°å½•ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
       encoder_ruler_left_limit=pos;
     }
     else if (!encoder_ruler_right_limit_flag)
     {
       MC_ProgramSpeedRampMotor1(-50, 50);
-      // ¼ÇÂ¼Á½²àÎ»ÖÃµÄ±ê¶¨Öµ
+      // è®°å½•ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
       encoder_ruler_right_limit=pos;
     }
     else
     {
-      // µç»úµ½´ïÁ½²à£¬Í£Ö¹µç»ú
+      // ç”µæœºåˆ°è¾¾ä¸¤ä¾§ï¼Œåœæ­¢ç”µæœº
       MC_ProgramSpeedRampMotor1(0, 0);
-      // ±ê¶¨Íê³É
+      // æ ‡å®šå®Œæˆ
       encoder_ruler_limit_calibrated=true;
     }
   }
-  // Êä³ö×óÓÒÁ½²àÎ»ÖÃµÄ±ê¶¨Öµ
+  // è¾“å‡ºå·¦å³ä¸¤ä¾§ä½ç½®çš„æ ‡å®šå€¼
   // [DEBUG]
   if (debug)
   {
     printf("Encoder Ruler Left Limit:%f\r\n",encoder_ruler_left_limit);
     printf("Encoder Ruler Right Limit:%f\r\n",encoder_ruler_right_limit);
-    // Êä³ö±ê¶¨Íê³É
+    // è¾“å‡ºæ ‡å®šå®Œæˆ
     printf("Encoder Ruler Limit Calibrated!\r\n");
-    // »»ĞĞ
+    // æ¢è¡Œ
     printf("\r\n");
   }
 }
 
-// [TASK-2] ¼ÆËãÖĞ¼äÎ»ÖÃ
+// [TASK-2] è®¡ç®—ä¸­é—´ä½ç½®
 void Calibrate_Encoder_Ruler_Middle()
 {
-  // ¼ÆËãÖĞ¼äÎ»ÖÃµÄ±ê¶¨Öµ
+  // è®¡ç®—ä¸­é—´ä½ç½®çš„æ ‡å®šå€¼
   encoder_ruler_middle=(encoder_ruler_left_limit+encoder_ruler_right_limit)/2;
   if(debug)
   {
     printf("Encoder Ruler Middle:%f\r\n",encoder_ruler_middle);
-    // Êä³ö±ê¶¨Íê³É
+    // è¾“å‡ºæ ‡å®šå®Œæˆ
     printf("Encoder Ruler Middle Calibrated!\r\n");
   }
 }
 
-// [TASK-2] ¿ØÖÆµç»úËÙ¶È£¬´«Èë²ÎÊıÎªµç»úÎ»ÖÃ£¬¾İ´Ë¼ÆËãµç»úËÙ¶È
+// [TASK-2] æ§åˆ¶ç”µæœºé€Ÿåº¦ï¼Œä¼ å…¥å‚æ•°ä¸ºç”µæœºä½ç½®ï¼Œæ®æ­¤è®¡ç®—ç”µæœºé€Ÿåº¦
 void Control_Motor_Speed(float position)
 {
   // [DEBUG]
   if (debug)
   {
-    // Êä³öµç»úÎ»ÖÃ
+    // è¾“å‡ºç”µæœºä½ç½®
     printf("Encoder Ruler Position:%f\r\n",position);
-    // Êä³öÖĞ¼äÎ»ÖÃ
+    // è¾“å‡ºä¸­é—´ä½ç½®
     printf("Encoder Ruler Middle:%f\r\n",encoder_ruler_middle);
-    // Êä³öµç»úÎ»ÖÃµ½ÖĞ¼äÎ»ÖÃµÄ¾àÀë
+    // è¾“å‡ºç”µæœºä½ç½®åˆ°ä¸­é—´ä½ç½®çš„è·ç¦»
     printf("Encoder Ruler Distance:%f\r\n",fabs(position-encoder_ruler_middle));
-    // »»ĞĞ
+    // æ¢è¡Œ
     printf("\r\n");
   }
 
-  // µç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄÓàÁ¿·¶Î§ÄÚ£¬µç»úËÙ¶ÈÉèÎª0
+  // ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„ä½™é‡èŒƒå›´å†…ï¼Œç”µæœºé€Ÿåº¦è®¾ä¸º0
   if (fabs(position-encoder_ruler_middle)<middle_limit)
   {
     // [DEBUG]
@@ -421,21 +421,21 @@ void Control_Motor_Speed(float position)
     MC_ProgramSpeedRampMotor1(0, 0);
     MC_StopMotor1();
 
-    // ±ê¼Çµç»úµ½´ïÖĞ¼äÎ»ÖÃ
+    // æ ‡è®°ç”µæœºåˆ°è¾¾ä¸­é—´ä½ç½®
     find_home_flag = false;
   }
-  // µç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄÓàÁ¿·¶Î§Íâ
+  // ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„ä½™é‡èŒƒå›´å¤–
   else
   {
     // [DEBUG]
     if (debug)
       printf("MOTIVATE MOTOR \r\n");
-    // Èôµç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄ×ó²à£¬µç»úËÙ¶ÈÎª¸º
+    // è‹¥ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„å·¦ä¾§ï¼Œç”µæœºé€Ÿåº¦ä¸ºè´Ÿ
     if (position<encoder_ruler_middle)
     {
       MC_ProgramSpeedRampMotor1(50, 10);
     }
-    // Èôµç»úÎ»ÖÃÔÚÖĞ¼äÎ»ÖÃµÄÓÒ²à£¬µç»úËÙ¶ÈÎªÕı
+    // è‹¥ç”µæœºä½ç½®åœ¨ä¸­é—´ä½ç½®çš„å³ä¾§ï¼Œç”µæœºé€Ÿåº¦ä¸ºæ­£
     else
     {
       MC_ProgramSpeedRampMotor1(-50, 10);
@@ -444,18 +444,18 @@ void Control_Motor_Speed(float position)
 }
 
 // [TASK-3] 
-// ³õÊ¼»¯Ò»¸öÆµÂÊËæ×ÅÊ±¼äÖ¸ÊıÔö¼ÓµÄÕıÏÒÉ¨ÆµĞÅºÅµÄ½á¹¹Ìå
-// ÊäÈë£ºunsigned int t_0 É¨Æµº¯ÊıµÄÆğÊ¼Ê±¿Ì£¬ µ¥Î»ms
-// ÊäÈë£ºunsigned int t_01 ´Ót0µ½t1µÄÊ±¼ä¼ä¸ô, µ¥Î»ms
-// ÊäÈë£ºfloat f0 Ê±¿Ìt0¶ÔÓ¦µÄÆµÂÊ£¬ µ¥Î»hz
-// ÊäÈë£ºfloat f1 Ê±¿Ìt1¶ÔÓ¦µÄÆµÂÊ£¬ µ¥Î»hz 
-// ÊäÈë£ºfloat A É¨ÆµĞÅºÅµÄ·ùÖµ
-// Êä³ö£ºint 0 = ³É¹¦·µ»Ø0
+// åˆå§‹åŒ–ä¸€ä¸ªé¢‘ç‡éšç€æ—¶é—´æŒ‡æ•°å¢åŠ çš„æ­£å¼¦æ‰«é¢‘ä¿¡å·çš„ç»“æ„ä½“
+// è¾“å…¥ï¼šunsigned int t_0 æ‰«é¢‘å‡½æ•°çš„èµ·å§‹æ—¶åˆ»ï¼Œ å•ä½ms
+// è¾“å…¥ï¼šunsigned int t_01 ä»t0åˆ°t1çš„æ—¶é—´é—´éš”, å•ä½ms
+// è¾“å…¥ï¼šfloat f0 æ—¶åˆ»t0å¯¹åº”çš„é¢‘ç‡ï¼Œ å•ä½hz
+// è¾“å…¥ï¼šfloat f1 æ—¶åˆ»t1å¯¹åº”çš„é¢‘ç‡ï¼Œ å•ä½hz 
+// è¾“å…¥ï¼šfloat A æ‰«é¢‘ä¿¡å·çš„å¹…å€¼
+// è¾“å‡ºï¼šint 0 = æˆåŠŸè¿”å›0
 int init_my_sweep(my_sweep_t *sweep, unsigned int t_0, unsigned int t_01, float f0, float f1, float A) 
 { 
   if ((t_01 == 0) || (f0 <=0.0f) || (f1 <= 0.0f) || (f0 == f1) || (A == 0) || (!sweep)) 
   {
-    //·Ç·¨Èë²Î
+    //éæ³•å…¥å‚
     return -1;
   }
 
@@ -466,33 +466,33 @@ int init_my_sweep(my_sweep_t *sweep, unsigned int t_0, unsigned int t_01, float 
   sweep->A = A;
 
   /* start add code here */ 
-  /*¼ÆËãÖ¸Êıº¯ÊıµÄµ×Êık£¬×¢ÒâÊ±¼äµÄµ¥Î»Òª×ª»»Îªms*/ 
+  /*è®¡ç®—æŒ‡æ•°å‡½æ•°çš„åº•æ•°kï¼Œæ³¨æ„æ—¶é—´çš„å•ä½è¦è½¬æ¢ä¸ºms*/ 
   sweep->k = exp(1.0 / (double)(sweep->t_01* 0.001) * log(sweep->f1 / sweep->f0));
-  /*¼ÆËãÏµÊıp, ×¢Òâµ¥Î»×ª»»*/
+  /*è®¡ç®—ç³»æ•°p, æ³¨æ„å•ä½è½¬æ¢*/
   sweep->p = 2 * PI * sweep->f0 / log(sweep->k);
   /* end add code here */
 
   return 0; 
 }
 
-// [TASK-3] ¸ù¾İµ±Ç°Ê±¼äÊä³öÆµÂÊËæ×ÅÊ±¼äÖ¸ÊıÔö¼ÓµÄÕıÏÒÉ¨ÆµĞÅºÅ
+// [TASK-3] æ ¹æ®å½“å‰æ—¶é—´è¾“å‡ºé¢‘ç‡éšç€æ—¶é—´æŒ‡æ•°å¢åŠ çš„æ­£å¼¦æ‰«é¢‘ä¿¡å·
 float run_my_sweep(my_sweep_t *sweep, unsigned int t_now)
 {
-  float t = 0.0f; //Ïà¶ÔÊ±¼ä t 
-  float y = 0.0f; //É¨ÆµĞÅºÅ 
+  float t = 0.0f; //ç›¸å¯¹æ—¶é—´ t 
+  float y = 0.0f; //æ‰«é¢‘ä¿¡å· 
   
   if (!sweep) 
   { 
-    return 0.0f; /*·Ç·¨Èë²Î*/ 
+    return 0.0f; /*éæ³•å…¥å‚*/ 
   }
   
   if (t_now < sweep->t_0) 
   { 
-    return 0.0f; /*Ê±¼ä»¹Î´µÃµ½*/ 
+    return 0.0f; /*æ—¶é—´è¿˜æœªå¾—åˆ°*/ 
   }
   
-  t = (t_now - sweep->t_0) % sweep->t_01; /*Í¨¹ıÇóÓà²Ù×÷ÊµÏÖ£¬ÖÜÆÚĞÔÉ¨ÆµµÄ¹ı³Ì*/
-  t = t * 0.001f; /*½«µ¥Î»×ª»»Îª s*/
+  t = (t_now - sweep->t_0) % sweep->t_01; /*é€šè¿‡æ±‚ä½™æ“ä½œå®ç°ï¼Œå‘¨æœŸæ€§æ‰«é¢‘çš„è¿‡ç¨‹*/
+  t = t * 0.001f; /*å°†å•ä½è½¬æ¢ä¸º s*/
   
   /* start add your code here */
   y = sweep->A * sin(sweep->p * (pow(sweep->k, t) - 1));
@@ -501,7 +501,7 @@ float run_my_sweep(my_sweep_t *sweep, unsigned int t_now)
   return y;
 }
 
-// [TASK-3] ¼ÆËãĞ£ÑéºÍ
+// [TASK-3] è®¡ç®—æ ¡éªŒå’Œ
 uint8_t get_uint8_sum_check(uint8_t *data, int len) 
 { 
   int i = 0; 
@@ -515,27 +515,27 @@ uint8_t get_uint8_sum_check(uint8_t *data, int len)
   return sum; 
 }
 
-// [TASK-3] Ïòmatlab·¢ËÍÈı¸ö¸¡µãÊı
+// [TASK-3] å‘matlabå‘é€ä¸‰ä¸ªæµ®ç‚¹æ•°
 void send_data_2_matlab(float data1, float data2, float data3)
 { 
   frame_matlab_t frame = {0};
 
-  // int i = 0; /*Ìî³äÖ¡Í·*/ 
+  // int i = 0; /*å¡«å……å¸§å¤´*/ 
   frame.start_flag = 0xAA; 
   frame.frame_len = sizeof(frame); 
-  frame.header_check = get_uint8_sum_check((uint8_t *)&frame, 2); /*Ìî³äÊı¾İ*/
+  frame.header_check = get_uint8_sum_check((uint8_t *)&frame, 2); /*å¡«å……æ•°æ®*/
 
   memcpy((uint8_t *)&frame.data_buf[0], (uint8_t *)&data1, 4); 
   memcpy((uint8_t *)&frame.data_buf[4], (uint8_t *)&data2, 4); 
-  memcpy((uint8_t *)&frame.data_buf[8], (uint8_t *)&data3, 4); /*¼ÆËãÊı¾İÇóºÍÖµ,ÓÃÓÚ½ÓÊÕ·½Ğ£ÑéÊı¾İµÄÍêºÃĞÔ*/ 
+  memcpy((uint8_t *)&frame.data_buf[8], (uint8_t *)&data3, 4); /*è®¡ç®—æ•°æ®æ±‚å’Œå€¼,ç”¨äºæ¥æ”¶æ–¹æ ¡éªŒæ•°æ®çš„å®Œå¥½æ€§*/ 
   
-  frame.frame_check = get_uint8_sum_check((uint8_t *)&frame, frame.frame_len-1); /*Í¨¹ı ´®¿Ú5 ·¢ËÍµ½µçÄÔ */ 
+  frame.frame_check = get_uint8_sum_check((uint8_t *)&frame, frame.frame_len-1); /*é€šè¿‡ ä¸²å£5 å‘é€åˆ°ç”µè„‘ */ 
   
   HAL_UART_Transmit(&huart5, (uint8_t *)&frame,frame.frame_len,0xffff);   
 }
 
-// [TASK-3] ÊµÏÖÉ¨Æµ±æÊ¶¹¦ÄÜ£¬¸Ã¹¦ÄÜ½«±»·ÅÖÃÔÚmain º¯ÊıµÄwhile(1)ÖĞÔËĞĞ
-// bool is_reinit_sweep: ÊÇ·ñĞèÒªÖØĞÂ³õÊ¼»¯É¨ÆµĞÅºÅ
+// [TASK-3] å®ç°æ‰«é¢‘è¾¨è¯†åŠŸèƒ½ï¼Œè¯¥åŠŸèƒ½å°†è¢«æ”¾ç½®åœ¨main å‡½æ•°çš„while(1)ä¸­è¿è¡Œ
+// bool is_reinit_sweep: æ˜¯å¦éœ€è¦é‡æ–°åˆå§‹åŒ–æ‰«é¢‘ä¿¡å·
 void run_sweep_identification(bool is_reinit_sweep)
 {
   static my_sweep_t sweep = {0};
@@ -544,35 +544,35 @@ void run_sweep_identification(bool is_reinit_sweep)
   uint32_t sys_tick = 0;
   static uint32_t init_flag = 0; 
   static uint32_t last_sys_tick = 0; 
-  // ÈôĞèÒªÖØĞÂ³õÊ¼»¯É¨ÆµĞÅºÅ
+  // è‹¥éœ€è¦é‡æ–°åˆå§‹åŒ–æ‰«é¢‘ä¿¡å·
   if (is_reinit_sweep == true) 
   { 
     init_flag = 0; 
   }
 
-  // ÆµÂÊÔÚ10sÄÚ£¬´Ó0.5hz±ä»¯µ½10hz£¬·ù¶ÈÎª1500 digit current
+  // é¢‘ç‡åœ¨10så†…ï¼Œä»0.5hzå˜åŒ–åˆ°10hzï¼Œå¹…åº¦ä¸º1500 digit current
   uint32_t t_period_ms = 10*1000; //10s 
   float f0 = 0.5; 
   float f1 = 10; 
   float Amp = 1500.0f; 
   
   float time = 0.0f;
-  sys_tick = HAL_GetTick(); //»ñÈ¡µ±Ç°Ê±¿Ì£¬µ¥Î»ms 
-  time = 0.001f * sys_tick; //µ¥Î»s
+  sys_tick = HAL_GetTick(); //è·å–å½“å‰æ—¶åˆ»ï¼Œå•ä½ms 
+  time = 0.001f * sys_tick; //å•ä½s
 
-  /*½øÈëµÄÌõ¼şÊ±»ØÁã³É¹¦£¬ÇÒ°´ÁËK1ÔËĞĞ, ¾Í¿ªÊ¼Ö´ĞĞÉ¨Æµ±æÊ¶¹ı³Ì£¬
-    ×¢Òâfind_home_flagÊÇ»ØÁã³É¹¦µÄ±êÖ¾Î»£¬ÊÇÒ»¸öÈ«¾Ö±äÁ¿,ÒªÔÚÍâ²¿ÊµÏÖÕâ¸ö±êÖ¾±äÁ¿*/
+  /*è¿›å…¥çš„æ¡ä»¶æ—¶å›é›¶æˆåŠŸï¼Œä¸”æŒ‰äº†K1è¿è¡Œ, å°±å¼€å§‹æ‰§è¡Œæ‰«é¢‘è¾¨è¯†è¿‡ç¨‹ï¼Œ
+    æ³¨æ„find_home_flagæ˜¯å›é›¶æˆåŠŸçš„æ ‡å¿—ä½ï¼Œæ˜¯ä¸€ä¸ªå…¨å±€å˜é‡,è¦åœ¨å¤–éƒ¨å®ç°è¿™ä¸ªæ ‡å¿—å˜é‡*/
   // if ((find_home_flag == 1) && (MC_GetSTMStateMotor1() == RUN)) {
   if ((sweep_identification_flag == true) && (MC_GetSTMStateMotor1() == RUN)) 
   {
-    // Èç¹ûµ±Ç°Ê±¿Ì·¢ÉúÁË±ä»¯£¬Õâ¸öÌõ¼şÃ¿ms¶¼»á³ÉÁ¢
+    // å¦‚æœå½“å‰æ—¶åˆ»å‘ç”Ÿäº†å˜åŒ–ï¼Œè¿™ä¸ªæ¡ä»¶æ¯mséƒ½ä¼šæˆç«‹
     if (last_sys_tick != sys_tick)  
     {
       last_sys_tick = sys_tick;
-      // Í¨¹ı % °ÑÆµÂÊ´Ó1000hz½µµÍµ½100hz£¬¼´Ã¿10ms·¢ÉúÒ»´Î±ä»¯
+      // é€šè¿‡ % æŠŠé¢‘ç‡ä»1000hzé™ä½åˆ°100hzï¼Œå³æ¯10mså‘ç”Ÿä¸€æ¬¡å˜åŒ–
       if (sys_tick % 10 == 0) 
       {
-          // ³õÊ¼»¯É¨ÆµÅäÖÃ
+          // åˆå§‹åŒ–æ‰«é¢‘é…ç½®
           if (init_flag == 0) 
           {
               init_my_sweep(&sweep, sys_tick, t_period_ms, f0, f1, Amp);
@@ -581,14 +581,14 @@ void run_sweep_identification(bool is_reinit_sweep)
               init_flag = 1;
           }
 
-          // »ñÈ¡ÕıÏÒÉ¨ÆµĞÅºÅ
+          // è·å–æ­£å¼¦æ‰«é¢‘ä¿¡å·
           sweep_input = (int16_t)run_my_sweep(&sweep, sys_tick);
 
-          // ½«ÕıÏÒÉ¨ÆµĞÅºÅÊäÈëµ½ ST MC SDKµÄÁ¦¾Ø¿ØÖÆAPIÖĞ
+          // å°†æ­£å¼¦æ‰«é¢‘ä¿¡å·è¾“å…¥åˆ° ST MC SDKçš„åŠ›çŸ©æ§åˆ¶APIä¸­
           MC_ProgramTorqueRampMotor1(sweep_input, 0);  
-          // »ñÈ¡Ë¿¸ËµÄ×ªËÙĞÅÏ¢£¬µ¥Î»Îª0.1hz
+          // è·å–ä¸æ†çš„è½¬é€Ÿä¿¡æ¯ï¼Œå•ä½ä¸º0.1hz
           sweep_output = MC_GetMecSpeedAverageMotor1(); 
-          // °ÑÊ±¼ä£¬input£¬output·¢ËÍµ½matlab
+          // æŠŠæ—¶é—´ï¼Œinputï¼Œoutputå‘é€åˆ°matlab
           send_data_2_matlab(time, (float)sweep_input, (float)sweep_output);
           // [DEBUG]
           if(debug)
@@ -598,19 +598,19 @@ void run_sweep_identification(bool is_reinit_sweep)
   }
 }
 
-// [TASK-3] ¿ØÖÆº¯ÊıÊµÏÖ
+// [TASK-3] æ§åˆ¶å‡½æ•°å®ç°
 // ======================================================
-// ====   ¸ù¾İµç»úÊµ¼Ê±æÊ¶½á¹û£¬Éè¼Æ¿ØÖÆÆ÷²¢½øĞĞÀëÉ¢»¯   ====
+// ====   æ ¹æ®ç”µæœºå®é™…è¾¨è¯†ç»“æœï¼Œè®¾è®¡æ§åˆ¶å™¨å¹¶è¿›è¡Œç¦»æ•£åŒ–   ====
 // ======================================================
 int discrete_control_func(int32_t u0, float e1, float e0)
 {
   return (int)(-0.6667*u0 + 3000*e1 - 2200*e0);
 }
 
-// [TASK-3] ÊµÏÖ½×Ô¾²âÊÔº¯Êı£¬·ÅÔÚmainµÄwhile(1)ÖĞ½øĞĞ½×Ô¾²âÊÔ
+// [TASK-3] å®ç°é˜¶è·ƒæµ‹è¯•å‡½æ•°ï¼Œæ”¾åœ¨mainçš„while(1)ä¸­è¿›è¡Œé˜¶è·ƒæµ‹è¯•
 void function_step_test(void)
 {
-  /*1.¶¨Òå¾Ö²¿±äÁ¿ºÍ¾²Ì¬±äÁ¿*/
+  /*1.å®šä¹‰å±€éƒ¨å˜é‡å’Œé™æ€å˜é‡*/
   static int32_t u1 = 0;
   static int32_t u0 = 0;
   static float e1 = 0;
@@ -620,47 +620,47 @@ void function_step_test(void)
   float Amp = 20;
   static float ref = 0;
 
-  /*2.³õÊ¼»¯ÄãµÄ¿ØÖÆÆ÷*/ 
+  /*2.åˆå§‹åŒ–ä½ çš„æ§åˆ¶å™¨*/ 
   float time = 0.0f;
   sys_tick = HAL_GetTick();
   time = 0.001f * sys_tick;
   
-  /*3.Æô¶¯step²âÊÔ¹¦ÄÜÌõ¼şÂú×ã*/
+  /*3.å¯åŠ¨stepæµ‹è¯•åŠŸèƒ½æ¡ä»¶æ»¡è¶³*/
   // if ((find_home_flag==true)&&(MC_GetSTMStateMotor1()==RUN))
   if ((step_test_flag==true)&&(MC_GetSTMStateMotor1()==RUN))
   { 
-    /*4.·ÖÆµÆ÷È·¶¨µ±Ç°tickÎª¿ØÖÆÆ÷ÔËĞĞµÄtick*/
+    /*4.åˆ†é¢‘å™¨ç¡®å®šå½“å‰tickä¸ºæ§åˆ¶å™¨è¿è¡Œçš„tick*/
     if (sys_tick % 10 == 0)
     { 
       if(step_first_flag == true)
       {
-        /*5.»ñÈ¡¹âÕ¤³ßµÄµ±Ç°Î»ÖÃ fdk (mm)*/ 
+        /*5.è·å–å…‰æ …å°ºçš„å½“å‰ä½ç½® fdk (mm)*/ 
         fdk = Get_Encoder_Ruler_Count();
 
-        /*6.Ö¸¶¨½×Ô¾µÄ¾àÀëAmpÍ³Ò»¶¨ÒåÎª20mm*/ 
+        /*6.æŒ‡å®šé˜¶è·ƒçš„è·ç¦»Ampç»Ÿä¸€å®šä¹‰ä¸º20mm*/ 
         Amp = 20;
 
-        /*7.Ò»´ÎĞÔ¼ÆËãµ±Ç°²Î¿¼Öµ ref = fdk+Amp*/ 
+        /*7.ä¸€æ¬¡æ€§è®¡ç®—å½“å‰å‚è€ƒå€¼ ref = fdk+Amp*/ 
         ref = Amp + fdk;
         step_first_flag = false;
       }
 
-      /*8.½«ref×÷ÎªÄãµÄÎ»ÖÃ¿ØÖÆÆ÷µÄÊäÈëÃüÁî£¬µ÷ÓÃ¿ØÖÆÆ÷*/ 
+      /*8.å°†refä½œä¸ºä½ çš„ä½ç½®æ§åˆ¶å™¨çš„è¾“å…¥å‘½ä»¤ï¼Œè°ƒç”¨æ§åˆ¶å™¨*/ 
       e1 = ref - Get_Encoder_Ruler_Count();
       // u1 = (int)(-0.6667*u0 + 3000*e1 - 2200*e0);
       u1 = discrete_control_func(u0, e1, e0);
       
-      // ÏŞÖÆu1µÄ·¶Î§£¬´¦Àí±¥ºÍÇé¿ö
+      // é™åˆ¶u1çš„èŒƒå›´ï¼Œå¤„ç†é¥±å’Œæƒ…å†µ
       if(u1 > 4997) u1 = 4997;
       if(u1 < -4997) u1 = -4997;
-      // Í¨¹ıST MC SDKµÄÁ¦¾Ø¿ØÖÆAPI£¬½«u1×÷ÎªÊäÈë£¬¿ØÖÆµç»ú
+      // é€šè¿‡ST MC SDKçš„åŠ›çŸ©æ§åˆ¶APIï¼Œå°†u1ä½œä¸ºè¾“å…¥ï¼Œæ§åˆ¶ç”µæœº
       MC_ProgramTorqueRampMotor1(u1, 0);
-      // ¸üĞÂe0ºÍu0
+      // æ›´æ–°e0å’Œu0
       e0 = e1;
       u0 = u1;
       fdk = Get_Encoder_Ruler_Count();
 
-      /*9.Ê¹ÓÃ send_data_2_matlab, °ÑÊ±¼ä£¬ref, fdk·¢ËÍµ½matlab½øĞĞÏÔÊ¾*/ 
+      /*9.ä½¿ç”¨ send_data_2_matlab, æŠŠæ—¶é—´ï¼Œref, fdkå‘é€åˆ°matlabè¿›è¡Œæ˜¾ç¤º*/ 
       send_data_2_matlab(time, (float)ref, (float)fdk);
     } 
     else 
@@ -679,10 +679,10 @@ void function_step_test(void)
   }
 }
 
-// [TASK-3] ÊµÏÖÒ»¸öÉ¨Æµ²âÊÔº¯Êı£¬·ÅÔÚmainµÄwhile(1)ÖĞ½øĞĞÉ¨Æµ¸úËæ²âÊÔ£¬ÑéÖ¤wÎ»ÖÃ±Õ»·´ø¿í
+// [TASK-3] å®ç°ä¸€ä¸ªæ‰«é¢‘æµ‹è¯•å‡½æ•°ï¼Œæ”¾åœ¨mainçš„while(1)ä¸­è¿›è¡Œæ‰«é¢‘è·Ÿéšæµ‹è¯•ï¼ŒéªŒè¯wä½ç½®é—­ç¯å¸¦å®½
 void function_follow_test(void)
 { 
-  /*1.¶¨Òå¾Ö²¿±äÁ¿ºÍ¾²Ì¬±äÁ¿*/
+  /*1.å®šä¹‰å±€éƒ¨å˜é‡å’Œé™æ€å˜é‡*/
   static int32_t u1 = 0;
   static int32_t u0 = 0;
   static float e1 = 0;
@@ -691,44 +691,44 @@ void function_follow_test(void)
   float fdk;
   static float ref = 0;
   
-  /*2.³õÊ¼»¯ÄãµÄ¿ØÖÆÆ÷*/
+  /*2.åˆå§‹åŒ–ä½ çš„æ§åˆ¶å™¨*/
   float time = 0.0f;
   sys_tick = HAL_GetTick();
   time = 0.001f * sys_tick;
   
-  /*3.³õÊ¼»¯ÄãµÄÕıÏÒĞÅºÅ·¢ÉúÆ÷·ùÖµÎª20mm, ÆµÂÊÔÚ10sÄÚ´Ó1hz±ä»¯µ½2hz*/
+  /*3.åˆå§‹åŒ–ä½ çš„æ­£å¼¦ä¿¡å·å‘ç”Ÿå™¨å¹…å€¼ä¸º20mm, é¢‘ç‡åœ¨10så†…ä»1hzå˜åŒ–åˆ°2hz*/
   //10s 1hz->2hz
   static float w = 1*2*3.1415;
   float Amp = 20;
 
-  /*4.Æô¶¯É¨Æµ¸úËæ²âÊÔ¹¦ÄÜÌõ¼şÂú×ã*/
+  /*4.å¯åŠ¨æ‰«é¢‘è·Ÿéšæµ‹è¯•åŠŸèƒ½æ¡ä»¶æ»¡è¶³*/
   // if ((find_home_flag==1)&&(MC_GetSTMStateMotor1()==RUN)) 
   if ((follow_test_flag)&&(MC_GetSTMStateMotor1()==RUN)) 
   { 
-    /*5.·ÖÆµÆ÷È·¶¨µ±Ç°tickÎª¿ØÖÆÆ÷ÔËĞĞµÄtick*/
+    /*5.åˆ†é¢‘å™¨ç¡®å®šå½“å‰tickä¸ºæ§åˆ¶å™¨è¿è¡Œçš„tick*/
     if (sys_tick % 10 == 0) 
     { 
-      /*6.»ñÈ¡¹âÕ¤³ßµÄµ±Ç°Î»ÖÃ fdk (mm)*/
+      /*6.è·å–å…‰æ …å°ºçš„å½“å‰ä½ç½® fdk (mm)*/
       fdk = Get_Encoder_Ruler_Count();
       
-      /*7.Ã¿¸ötick¶¼»ñÈ¡×îĞÂµÄÉ¨ÆµĞÅºÅÊä³ö£¬×÷Îªµ±Ç°²Î¿¼Öµ ref = sweep(now)*/
+      /*7.æ¯ä¸ªtickéƒ½è·å–æœ€æ–°çš„æ‰«é¢‘ä¿¡å·è¾“å‡ºï¼Œä½œä¸ºå½“å‰å‚è€ƒå€¼ ref = sweep(now)*/
       ref = Amp*sin(w*time);
       
-      /*8.½«ref×÷ÎªÄãµÄÎ»ÖÃ¿ØÖÆÆ÷µÄÊäÈëÃüÁî£¬µ÷ÓÃ¿ØÖÆÆ÷*/
+      /*8.å°†refä½œä¸ºä½ çš„ä½ç½®æ§åˆ¶å™¨çš„è¾“å…¥å‘½ä»¤ï¼Œè°ƒç”¨æ§åˆ¶å™¨*/
       e1 = ref - fdk;
       // u1 = (int)(-0.6667*u0 + 3000*e1 - 2200*e0);
       u1 = discrete_control_func(u0, e1, e0);
 
-      // ÏŞÖÆu1µÄ·¶Î§£¬´¦Àí±¥ºÍÇé¿ö
+      // é™åˆ¶u1çš„èŒƒå›´ï¼Œå¤„ç†é¥±å’Œæƒ…å†µ
       if(u1 > 4997) u1 = 4997;
       if(u1 < -4997) u1 = -4997;
-      // Í¨¹ıST MC SDKµÄÁ¦¾Ø¿ØÖÆAPI£¬½«u1×÷ÎªÊäÈë£¬¿ØÖÆµç»ú
+      // é€šè¿‡ST MC SDKçš„åŠ›çŸ©æ§åˆ¶APIï¼Œå°†u1ä½œä¸ºè¾“å…¥ï¼Œæ§åˆ¶ç”µæœº
       MC_ProgramTorqueRampMotor1(u1, 0);
-      // ¸üĞÂe0ºÍu0
+      // æ›´æ–°e0å’Œu0
       e0 = e1;
       u0 = u1;
       fdk = Get_Encoder_Ruler_Count();
-      /*9.Ê¹ÓÃ send_data_2_matlab, °ÑÊ±¼ä£¬ref, fdk·¢ËÍµ½matlab½øĞĞÏÔÊ¾*/ 
+      /*9.ä½¿ç”¨ send_data_2_matlab, æŠŠæ—¶é—´ï¼Œref, fdkå‘é€åˆ°matlabè¿›è¡Œæ˜¾ç¤º*/ 
       send_data_2_matlab(time, (float)ref, (float)fdk);
     }
     else
@@ -799,7 +799,7 @@ int main(void)
 	MC_AlignEncoderMotor1();
   HAL_Delay(100);
 
-  // Æô¶¯µç»ú
+  // å¯åŠ¨ç”µæœº
   MC_StartMotor1();
   
   /* USER CODE END 2 */
@@ -808,33 +808,33 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // °´¼ü¼ì²â
+    // æŒ‰é”®æ£€æµ‹
     keys_detect();
-    // »ñÈ¡µ±Ç°Î»ÖÃ
+    // è·å–å½“å‰ä½ç½®
     pos=Get_Encoder_Ruler_Count();
     
-    // µç»ú»ØÁã
+    // ç”µæœºå›é›¶
     if (find_home_flag==true)
     {
-      // µç»úÎ»ÖÃ±ê¶¨
+      // ç”µæœºä½ç½®æ ‡å®š
       Calibrate_Encoder_Ruler_Limit();
-      // ¼ÆËãÖĞ¼äÎ»ÖÃ
+      // è®¡ç®—ä¸­é—´ä½ç½®
       Calibrate_Encoder_Ruler_Middle();
-      // ¿ØÖÆµç»úËÙ¶È£¬Ê¹µÃµç»ú»ØÁã
+      // æ§åˆ¶ç”µæœºé€Ÿåº¦ï¼Œä½¿å¾—ç”µæœºå›é›¶
       Control_Motor_Speed(pos);
     }
-    // ½øĞĞÉ¨Æµ±æÊ¶
+    // è¿›è¡Œæ‰«é¢‘è¾¨è¯†
     if(sweep_identification_flag==true)
     {
       run_sweep_identification(sweep_reinit_flag);
       sweep_reinit_flag = false;
     }
-    // ½øĞĞ½×Ô¾²âÊÔ
+    // è¿›è¡Œé˜¶è·ƒæµ‹è¯•
     if(step_test_flag==true)
     {
       function_step_test();
     }
-    // ½øĞĞÉ¨Æµ¸úËæ²âÊÔ
+    // è¿›è¡Œæ‰«é¢‘è·Ÿéšæµ‹è¯•
     if(follow_test_flag==true)
     {
       function_follow_test();
@@ -1434,24 +1434,24 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-// // GPIOÍâ²¿ÖĞ¶Ï»Øµ÷º¯Êı
+// // GPIOå¤–éƒ¨ä¸­æ–­å›è°ƒå‡½æ•°
 // void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 // {
 // }
 
-// ³õÊ¼ÉÏµçÊ±µç»úÎ»ÖÃÎª0£¬Á½²à¾àÀëÓÃ²»Í¬·ûºÅ±íÊ¾
-// ¾­¹ı²âÊÔ£¬µç»úÔÚÕû¸öµ¼¹ìÉÏµÄÔË¶¯·¶Î§²»»á³¬¹ıÏŞÖÆ
+// åˆå§‹ä¸Šç”µæ—¶ç”µæœºä½ç½®ä¸º0ï¼Œä¸¤ä¾§è·ç¦»ç”¨ä¸åŒç¬¦å·è¡¨ç¤º
+// ç»è¿‡æµ‹è¯•ï¼Œç”µæœºåœ¨æ•´ä¸ªå¯¼è½¨ä¸Šçš„è¿åŠ¨èŒƒå›´ä¸ä¼šè¶…è¿‡é™åˆ¶
 float Get_Encoder_Ruler_Count(void)
 {
-  // Ê¹ÓÃint32_tÀàĞÍ£¬ÓÉÓÚÊµ¼Ê¼ÆÊıÖµÎª16Î»£¬ValueÊ¼ÖÕÎªÕıÊı
+  // ä½¿ç”¨int32_tç±»å‹ï¼Œç”±äºå®é™…è®¡æ•°å€¼ä¸º16ä½ï¼ŒValueå§‹ç»ˆä¸ºæ­£æ•°
 	int32_t Value = __HAL_TIM_GET_COUNTER(&htim3);
   
   float CaptureNumber=0;
 	float ruler_pos=0.0f;
 
-  // 16Î»ÊıµÄ·¶Î§Î»0~65535£¬µ±ÊıÖµ´óÓÚ32768Ê±£¬ËµÃ÷¼ÆÊıÖµÒç³ö£¬ĞèÒª¼õÈ¥65536
+  // 16ä½æ•°çš„èŒƒå›´ä½0~65535ï¼Œå½“æ•°å€¼å¤§äº32768æ—¶ï¼Œè¯´æ˜è®¡æ•°å€¼æº¢å‡ºï¼Œéœ€è¦å‡å»65536
   CaptureNumber = (Value > 32768) ? (Value - 65536) : (Value);
-  // ½«¾àÀë½øĞĞ×ª»»£¬µ¥Î»Îªmm
+  // å°†è·ç¦»è¿›è¡Œè½¬æ¢ï¼Œå•ä½ä¸ºmm
 	ruler_pos = (float)(CaptureNumber*0.005f);
 
   // [DEBUG]
@@ -1462,8 +1462,8 @@ float Get_Encoder_Ruler_Count(void)
   }
 
 	return ruler_pos;
-  // Êµ¼ÊÊ¹ÓÃint16_tÀàĞÍÊ±£¬¿ÉÒÔÕıÈ·ÏÔÊ¾¸ºÊı
-  // ²»ĞèÒª½øĞĞ¶îÍâ´¦Àí£¬µ«ÊÇ²»Ïë¸ÄÁË£¬¾ÍĞ´ÔÚ×¢ÊÍÀïÃæ°É
+  // å®é™…ä½¿ç”¨int16_tç±»å‹æ—¶ï¼Œå¯ä»¥æ­£ç¡®æ˜¾ç¤ºè´Ÿæ•°
+  // ä¸éœ€è¦è¿›è¡Œé¢å¤–å¤„ç†ï¼Œä½†æ˜¯ä¸æƒ³æ”¹äº†ï¼Œå°±å†™åœ¨æ³¨é‡Šé‡Œé¢å§
   // int16_t test_value = __HAL_TIM_GET_COUNTER(&htim3);
   // printf("test_value:%d\r\n",test_value);
   // ruler_pos = (float)(test_value*0.005f);
