@@ -230,6 +230,7 @@ static void MX_UART5_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
+// [GENERAL]获取转换后的编码器位置，单位为mm
 float Get_Encoder_Ruler_Count(void);
 
 // [GENERAL] 单个按键处理函数，进行消抖处理
