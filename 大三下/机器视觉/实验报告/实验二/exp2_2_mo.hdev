@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="22.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* 读取图像</c>
+<l>read_image (Image, 'E:/作业/大三下/机器视觉/实验/IMAGES/1.jpg')</l>
+<l>rgb1_to_gray (Image, Image_gray)</l>
+<c>* 打开窗口</c>
+<l>dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<c>* 显示图像</c>
+<l>dev_display (Image_gray)</l>
+<c>* 画矩形区域</c>
+<l>draw_rectangle1 (WindowHandle, Row1, Column1, Row2, Column2)</l>
+<c>* 生成矩形区域</c>
+<l>gen_rectangle1 (Rectangle, Row1, Column1, Row2, Column2)</l>
+<c>* 裁剪目标区域图像</c>
+<l>reduce_domain (Image_gray, Rectangle, ImageReduced)</l>
+<c>* 创建NCC模板</c>
+<l>create_ncc_model (ImageReduced, 'auto', -0.39, 0.79, 'auto', 'use_polarity', ModelID)</l>
+<c>* 清理窗口</c>
+<l>dev_clear_window ()</l>
+<c>* 读取待匹配的图像</c>
+<l>read_image (Image2, 'E:/作业/大三下/机器视觉/实验/IMAGES/3.jpg')</l>
+<l>rgb1_to_gray(Image2, Image2_gray)</l>
+<c>* 显示图像</c>
+<l>dev_display (Image2_gray)</l>
+<c>* 搜索NCC模板</c>
+<l>find_ncc_model (Image2_gray, ModelID, -0.39, 0.79, 0.5, 1, 0.5, 'true', 0, Row, Column, Angle, Score)</l>
+<c>* 显示匹配结果</c>
+<l>* dev_display_ncc_matching_results (ModelID, 'red', Row, Column, Angle, 0)</l>
+<c>* 释放NCC模板</c>
+<l>* clear_ncc_model (ModelID)</l>
+<c></c>
+<c>* 获取模板的宽度和高度</c>
+<c></c>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
