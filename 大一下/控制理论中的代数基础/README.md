@@ -23,6 +23,7 @@
 推荐几个学习网站：
 - [Linear Algebra Done Right课后习题解答](https://linearalgebras.com/)  
 - [类StackOverflow的线代答疑网](https://math.stackexchange.com/)
+- [kumiko b站视频](https://www.bilibili.com/video/BV1uK4y1a7jL/?spm_id_from=333.999.0.0&vd_source=ee9a2683a5f602f2e565f5f62e1fa764)
 
 最后吐槽一下：国内的课本是真的一坨
 
