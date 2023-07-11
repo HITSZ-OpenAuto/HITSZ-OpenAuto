@@ -1,0 +1,14 @@
+三 C A B
+四 A C B B
+五 A A B B
+六 B A B C
+七 C C A B
+八 B C C A
+十 C C B A A A B C
+十一 B C C C
+十三 A B D B A
+十四 C A A B C
+十五 C B A D A
+十六 B D B B D
+十七 B D C A B
+十八 D B D D C
