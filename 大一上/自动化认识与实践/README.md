@@ -5,6 +5,8 @@
 
 ## 关于教师
 
+自动化专业导论、工程制图、机器人设计与实践分别由不同的老师先后负责讲授。
+
 ## 关于考试
 
 考试分为笔试和实验两块：
@@ -29,5 +31,6 @@
 
 后期老师会把实验室开放给学生，自行使用已有的零件搭建一辆能够巡线、使用机械臂、超声波避障的小车。小车会在期末进行考核，根据完成任务的情况打分。
 
-- 关于小车，欢迎访问 [MaxwellJay256](https://github.com/MaxwellJay256) 的仓库 [mega_12800](https://github.com/MaxwellJay256/mega_12800) 获取教程和经验分享！
-- 也欢迎访问 [longlin li](https://github.com/longlin10086)  的仓库 [HITSZ_lab_project](https://github.com/longlin10086/HITSZ_lab_project) 获取教程和经验分享！
+以下是一些2022级同学的代码仓库，我们在里面总结了经验和教程！
+- [MaxwellJay256](https://github.com/MaxwellJay256) 的仓库 [mega_12800](https://github.com/MaxwellJay256/mega_12800)
+- [longlin li](https://github.com/longlin10086) 的仓库 [HITSZ_lab_project](https://github.com/longlin10086/HITSZ_lab_project)
