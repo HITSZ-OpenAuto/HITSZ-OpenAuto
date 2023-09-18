@@ -1,6 +1,6 @@
 # 哈工大（深圳）自动化专业课程攻略 | HITSZ-OpenAuto
 
-> HITSZ-OpenAuto已迁移至HITSZ-Auto organization中，若有意愿成为组织维护者的同学请邮箱联系，前提：最近一个月内曾积极PR，并有空闲时间进行仓库维护
+> HITSZ-OpenAuto已迁移至HITSZ-Auto organization中，若有意愿成为组织维护者的同学请邮箱联系mh.li298@foxmail.com，前提：最近一个月内曾积极PR，并有空闲时间进行仓库维护
 
 ## 百星纪念！HITSZ-OpenAuto将为大家持续提供更优质的学习资料服务
 
