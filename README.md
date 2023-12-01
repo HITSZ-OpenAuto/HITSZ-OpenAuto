@@ -1,24 +1,13 @@
 # 哈工大（深圳）自动化专业课程攻略 | HITSZ-OpenAuto
 
-> [!IMPORTANT]
-> HITSZ-OpenAuto 2.0 施工中，各种资料正在以课程为单位拆分为若干子仓库，请尽量前往 [HITSZ-OpenAuto/Repositories](https://github.com/orgs/HITSZ-OpenAuto/repositories) 根据课程名搜索对应仓库然后访问。
-> 2024 年春季学期后，本仓库（不是本组织😁）将停止资料的更新（可能会被设置为 Private），届时所有资料将会被转移到各个子仓库中。
+> [!WARNING]
+> 本仓库内的资料已全部迁移至 [HITSZ-OpenAuto (Organization)](https://github.com/HITSZ-OpenAuto) 下，仓库已于 2023.12.2 日起被设置为 **Archive** 状态，不再提供更新以及接受贡献。
 >
-> 请 star 了本仓库的朋友考虑关注 [HITSZ-OpenAuto(Organization)](https://github.com/HITSZ-OpenAuto)，以免这个仓库从你的 stars 中消失后就找不到我们了😘。
-> 
-> 如果你没有找到你想要的课程，可能是因为我们还没有完成它的搬运，在这种请况下再考虑从本仓库中寻找资料。
-> 
-> 贡献者请尽量将资料贡献到对应子仓库中而不是这里。如果你想贡献的这门课还没有被搬运，请与我们联系，我们会第一时间为你的贡献开辟空间。
+> 本组织仍然在组织下的各个仓库更新资料，更多说明请前往 [releases](https://github.com/HITSZ-OpenAuto/HITSZ-OpenAuto/releases) 页面查看。
 >
-> 同时欢迎大家访问我们正在搭建的前端网站 https://hoa.moe ，无需代理即可访问 OpenAuto 2.0 的全部内容（下载功能锐意开发中）！
->
-> 感谢大家一直以来对 HITSZ-OpenAuto 一直以来的支持，我们会继续为大家无偿提供优质的服务！
-> <p align=right>2023.11</p>
+> <p align=right>2023.12.1</p>
 
-> HITSZ-OpenAuto 已迁移至 HITSZ-OpenAuto organization 中，若有意愿成为组织维护者的同学请邮箱联系mh.li298@foxmail.com，前提：最近一个月内曾积极PR，并有空闲时间进行仓库维护。
-> <p align=right>2023.9</p>
-
-## 百星纪念！HITSZ-OpenAuto将为大家持续提供更优质的学习资料服务
+## 百星纪念！HITSZ-OpenAuto 将为大家持续提供更优质的学习资料服务
 
 感谢那些曾经对该项目作出贡献的同学，他们是（排名不分先后）：
 [MinghangLi](https://github.com/lmh12138)、[猪肚鸡](https://github.com/xander-2077)、[Yuming LIU](https://github.com/handleandwheel)、[Sylybimike](https://github.com/sylybimike2001)、[小红帽](https://github.com/hoshino-lr)、[山樵](https://github.com/EricTonyLiu)、[Lewis74](https://github.com/Lewis74CoLA)、[longlin li](https://github.com/longlin10086)、[尘息](https://github.com/chenxijun)、[TangLongbin](https://github.com/TangLongbin)、[Huang-Zifeng](https://github.com/Huang-Zifeng)、[OliverWu515](https://github.com/OliverWu515)、[Mixlining](https://github.com/Mixlining)、[Sieroy](https://github.com/Sieroy)、[Maxwell Jay](https://github.com/MaxwellJay256)、[huangjifan12](https://github.com/huangjifan12)、[SkyGuoGary](https://github.com/SkyGuoGary)、[psp](https://github.com/pspdada)……等等许多优秀的同学以及电脑前即将进行资料PR的您！
