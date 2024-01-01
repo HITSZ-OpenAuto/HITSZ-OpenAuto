@@ -3,6 +3,8 @@
 > [!WARNING]
 > 本仓库内的资料已全部迁移至 [HITSZ-OpenAuto (Organization)](https://github.com/HITSZ-OpenAuto) 下，仓库已于 2023.12.2 日起被设置为 **Archive** 状态，不再提供更新以及接受贡献。
 >
+> 仓库内原有的文件已于 2024.1.1 移除。
+>
 > 本组织仍然在组织下的各个仓库更新资料，更多说明请前往 [releases](https://github.com/HITSZ-OpenAuto/HITSZ-OpenAuto/releases) 页面查看。
 >
 > <p align=right>2023.12.1</p>
